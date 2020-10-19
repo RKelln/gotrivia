@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bauman & Scholtz Trivia!</title>
+
+  <link href="public/css/reset.css" rel="stylesheet">
+  <link href="public/css/embla.css" rel="stylesheet">
+  <link href="public/css/trivia.css" rel="stylesheet">
+
+  <style>
+    .embla {
+      overflow: hidden;
+    }
+    .embla__container {
+      display: flex;
+    }
+    .embla__slide {
+      position: relative;
+      min-width: 100%;
+    }
+    .embla__slide__img {
+      position: relative;
+      max-width: 100%;
+      max-height: 900px;
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Embla -->
+    <div class="embla">
+      <div class="embla__viewport">
+        <div class="embla__container">
+          <!-- created by javascrript -->
+        </div>
+      </div>
+    </div>
+
+
+  <script src="https://unpkg.com/embla-carousel@latest/embla-carousel.umd.js"></script>
+
+  <script type="javascript" src="public/js/trivia.js"></script>
+
+  <script>
+    const wrap = document.querySelector(".embla");
+    const viewPort = wrap.querySelector(".embla__viewport");
+    const slideContainer = viewPort.querySelector(".embla__container");
+
+    const createSlidesFromJSON = (jsonData) => {
+      let html = '';
+
+      if (!jsonData.hasOwnProperty('slides') || jsonData.slides == null) {
+        console.log("No slide data in js");
+        return;
+      }
+
+      jsonData.slides.forEach((slide, s) => {
+        html += `
+        <div class="embla__slide">
+          <div class="embla__slide__inner">
+            <img 
+              class="embla__slide__img" 
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
+              data-src="public/images/${slide.image}" />`;
+
+        if (slide.hasOwnProperty('question') && slide.hasOwnProperty('answers')) {
+          html += `
+                <form>
+                  <fieldset>
+                    <legend>${slide.question}</legend>
+                    <ol>`;
+
+          slide.answers.forEach((answer, a) => {
+            let name = `s${s + 1}a${a + 1}`;
+            html += `
+                      <li>
+                        <input type="radio" name="${name}" id="${name}" value="${a}"/><label for="${name}">${answer}</label>
+                      </li>`;            
+          });
+
+          html += `
+                  </ol>
+                </fieldset>
+              </form>`;
+        }
+        html += `
+          </div>
+        </div>
+        `;
+      });
+      //console.log(html);
+      return html;
+    };
+
+    const lazyLoad = embla => {
+      const slides = embla.slideNodes();
+      const images = slides.map(slide => slide.querySelector(".embla__slide__img"));
+      console.log(images);
+      const imagesInView = [];
+
+      const addImageLoadEvent = (image, callback) => {
+        image.addEventListener("load", callback);
+        return () => image.removeEventListener("load", callback);
+      };
+
+      const loadImagesInView = () => {
+        embla
+          .slidesInView(true)
+          .filter(index => imagesInView.indexOf(index) === -1)
+          .forEach(loadImageInView);
+      };
+
+      const loadImageInView = index => {
+        const image = images[index];
+        const slide = slides[index];
+        imagesInView.push(index);
+        image.src = image.getAttribute("data-src");
+
+        const removeImageLoadEvent = addImageLoadEvent(image, () => {
+          slide.classList.add("has-loaded");
+          removeImageLoadEvent();
+        });
+      };
+
+      return () => {
+        loadImagesInView();
+        return imagesInView.length === images.length;
+      };
+    };
+
+    const init = data => {
+      slideContainer.innerHTML = createSlidesFromJSON(data);
+      const embla = EmblaCarousel(viewPort);
+      const loadImagesInView = lazyLoad(embla);
+      const loadImagesInViewAndDestroyIfDone = eventName => {
+        const loadedAll = loadImagesInView();
+        if (loadedAll) embla.off(eventName, loadImagesInViewAndDestroyIfDone);
+      };
+
+      embla.on("init", loadImagesInViewAndDestroyIfDone);
+      embla.on("select", loadImagesInViewAndDestroyIfDone);
+      embla.on("resize", loadImagesInViewAndDestroyIfDone);
+    }
+
+    fetch('slides')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        
+        init(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  </script>
+
+</body>
+</html>

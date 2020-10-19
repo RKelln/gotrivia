@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  padding: 10px;
+  width: auto;
+  max-width: 80em;
+}
+
+fieldset ol {
+  list-style: none;
+  line-height: 2em;
+}
+
+fieldset input[type="radio"] {
+  margin-right: 0.5em;
+}
