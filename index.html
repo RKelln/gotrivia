@@ -84,7 +84,7 @@
             let name = `s${s + 1}a${a + 1}`;
             html += `
                       <li>
-                        <button name="answer" id="${name}" value="${a}">
+                        <button name="answer" id="${name}" value="${a+1}">
                           ${answer}
                         </buttton>
                       </li>`;            
@@ -107,7 +107,6 @@
       container.querySelectorAll('button, input').forEach(
         button => button.addEventListener("click", event => {
           button.classList.add("selected");
-
         })
       );
 
@@ -116,10 +115,11 @@
         form => {
           form.addEventListener("submit", event => {
             event.preventDefault();
-            console.log("submit form", form);
+            console.log("submit form", form, event);
 
             let formData = new FormData(form);
             formData.append('player', 'player1');
+            formData.append('answer', event.submitter.value);
 
             const inputs = form.querySelectorAll('button, input');
             inputs.forEach(input => { input.disabled = true; });

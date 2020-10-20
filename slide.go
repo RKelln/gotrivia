@@ -7,6 +7,8 @@ import (
 
 import jsoniter "github.com/json-iterator/go"
 
+const slides_path = "./slides.json"
+
 type Slides struct {
 	Slides []Slide `json:"slides"`
 }
@@ -18,7 +20,13 @@ type Slide struct {
 	CorrectAnswer int      `json:"correct,omitempty"`
 }
 
-const slides_path = "./slides.json"
+func (s *Slides) answerKey() []int {
+	answers := make([]int, len(s.Slides))
+	for i, slide := range s.Slides {
+		answers[i] = slide.CorrectAnswer
+	}
+	return answers
+}
 
 func GetRawSlideJSON(filepath string) (string, error) {
 	str, err := ioutil.ReadFile(filepath)
@@ -29,8 +37,8 @@ func GetRawSlideJSON(filepath string) (string, error) {
 	return string(str), nil
 }
 
-func GetSlideJSON(filepath string) (Slides, error) {
-	slides := Slides{}
+func GetSlideJSON(filepath string) (*Slides, error) {
+	slides := &Slides{}
 	str, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		return slides, err
@@ -38,9 +46,8 @@ func GetSlideJSON(filepath string) (Slides, error) {
 	fmt.Println("Successfully opened ", filepath)
 
 	json := jsoniter.ConfigCompatibleWithStandardLibrary
-	if err := json.Unmarshal(str, &slides); err != nil {
+	if err := json.Unmarshal(str, slides); err != nil {
 		return slides, err
 	}
-	fmt.Print(slides)
 	return slides, nil
 }
