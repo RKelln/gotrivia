@@ -1,19 +1,45 @@
 package main
 
-import "github.com/gin-gonic/gin"
-
 import (
+	"context"
 	"fmt"
+	"log"
+	"net"
 	"net/http"
 	"os"
+	"os/signal"
 	"strconv"
+	"strings"
+	"syscall"
+	"time"
+
+	"go-trivia/trivia"
+
+	"github.com/gin-gonic/gin"
+	"github.com/thinkerou/favicon"
 )
 
-var slide_data *Slides
-var game_data *Game
+var slide_data *trivia.SlideList
+var game_data *trivia.Game
+
+const slides_path = "./slides.json"
+const game_path = "./game.json"
+const port = ":8080"
+
+func localIP() {
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		panic(err)
+	}
+	for _, addr := range addrs {
+		if strings.HasPrefix(addr.String(), "192") {
+			fmt.Printf("Local address: %v%v\n", strings.TrimSuffix(addr.String(), "/24"), port)
+		}
+	}
+}
 
 func myGame(c *gin.Context, playerName string) {
-	data, err := game_data.forPlayer(playerName)
+	data, err := game_data.ForPlayer(playerName)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		return
@@ -37,7 +63,7 @@ func postAnswer(c *gin.Context) {
 	message := fmt.Sprintf("%v answered slide %v with %v", player, slide, answer)
 	fmt.Println(message)
 
-	if err := game_data.addAnswer(player, slide, answer); err != nil {
+	if err := game_data.AddAnswer(player, slide, answer); err != nil {
 		c.String(http.StatusBadRequest, fmt.Sprintf("Could not set answer: %v: %v", message, err))
 		return
 	}
@@ -49,23 +75,26 @@ func postAnswer(c *gin.Context) {
 func main() {
 	var err error
 
-	slide_data, err = GetSlideJSON(slides_path)
+	localIP()
+
+	slide_data, err = trivia.GetSlideJSON(slides_path)
 	if err != nil {
 		fmt.Println("Could not open slide data: ", slides_path)
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	game_data, err = GetGameJSON(game_path)
+	game_data, err = trivia.GetGameJSON(game_path)
 	if err != nil {
 		fmt.Println("Could not open slide data: ", game_path)
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	NewGame(game_data, slide_data)
-	game_data.addPlayer(Player{Name: "player1"})
+	trivia.NewGame(game_data, slide_data)
 
 	router := gin.Default()
+	router.Use(favicon.New("./public/favicon.ico"))
+
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
@@ -76,8 +105,14 @@ func main() {
 		c.JSON(http.StatusOK, game_data.Slides)
 	})
 
-	router.GET("/game/:g/:playerName", func(c *gin.Context) {
+	router.GET("/game/:playerName", func(c *gin.Context) {
 		myGame(c, c.Param("playerName"))
+	})
+
+	router.POST("/game/:playerName", func(c *gin.Context) {
+		p := trivia.Player{Name: c.Param("playerName")}
+		game_data.AddPlayer(p)
+		myGame(c, p.Name)
 	})
 
 	router.POST("/answer/:slide", postAnswer)
@@ -86,5 +121,43 @@ func main() {
 	router.StaticFile("/", "index.html")
 	router.StaticFile("/favicon.ico", "./public/favicon.ico")
 
-	router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	//router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+
+	// TODO: add port setting
+	srv := &http.Server{
+		Addr:    port,
+		Handler: router,
+	}
+
+	// Initializing the server in a goroutine so that
+	// it won't block the graceful shutdown handling below
+	go func() {
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("listen: %s\n", err)
+		}
+	}()
+
+	// Wait for interrupt signal to gracefully shutdown the server with
+	// a timeout of 5 seconds.
+	quit := make(chan os.Signal)
+	// kill (no param) default send syscall.SIGTERM
+	// kill -2 is syscall.SIGINT
+	// kill -9 is syscall.SIGKILL but can't be catch, so don't need add it
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	log.Println("Shutting down server...")
+
+	if err := game_data.Save(game_path); err != nil {
+		fmt.Println("Error saving game:", err)
+	}
+
+	// The context is used to inform the server it has 2 seconds to finish
+	// the request it is currently handling
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("Server forced to shutdown:", err)
+	}
+
+	log.Println("Server exiting")
 }

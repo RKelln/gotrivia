@@ -1,19 +1,18 @@
-package main
+package trivia
 
 import (
 	"fmt"
 	"io/ioutil"
 	"os"
 	"sort"
+	"strings"
+
+	jsoniter "github.com/json-iterator/go"
 )
-
-import jsoniter "github.com/json-iterator/go"
-
-const game_path = "./game.json"
 
 type Game struct {
 	Players []Player `json:"players"`
-	Slides  Slides   `json:"slides"`
+	SlideList
 }
 
 type Player struct {
@@ -22,7 +21,7 @@ type Player struct {
 }
 
 type MyGame struct {
-	Slides   *Slides   `json:"slides"`
+	SlideList
 	Answers  []int     `json:"answers"`
 	Results  []int     `json:"results"`
 	Correct  []int     `json:"correct"`
@@ -34,14 +33,14 @@ type Ranking struct {
 	Points int    `json:"points"`
 }
 
-func (g *Game) addPlayer(p Player) error {
-	if _, found := findPlayer(g.Players, p.Name); found {
+func (g *Game) AddPlayer(p Player) error {
+	if _, found := FindPlayer(g.Players, p.Name); found {
 		return fmt.Errorf("Player %v already exists in game", p.Name)
 	}
 
 	// ensure player has answers
-	if len(p.Answers) != len(g.Slides.Slides) {
-		p.Answers = make([]int, len(g.Slides.Slides))
+	if len(p.Answers) != len(g.Slides) {
+		p.Answers = make([]int, len(g.Slides))
 	}
 
 	g.Players = append(g.Players, p)
@@ -49,8 +48,8 @@ func (g *Game) addPlayer(p Player) error {
 	return nil
 }
 
-func (g *Game) addAnswer(name string, slide int, answer int) error {
-	i, found := findPlayer(g.Players, name)
+func (g *Game) AddAnswer(name string, slide int, answer int) error {
+	i, found := FindPlayer(g.Players, name)
 	if !found {
 		return fmt.Errorf("Player %v doesn't exists in game", name)
 	}
@@ -59,7 +58,7 @@ func (g *Game) addAnswer(name string, slide int, answer int) error {
 		return fmt.Errorf("Invalid slide %v", slide)
 	}
 
-	if answer <= 0 || answer > len(g.Slides.Slides[slide].Answers) {
+	if answer <= 0 || answer > len(g.Slides[slide].Answers) {
 		return fmt.Errorf("Invalid answer %v for slide %v", answer, slide)
 	}
 
@@ -68,24 +67,24 @@ func (g *Game) addAnswer(name string, slide int, answer int) error {
 	return nil
 }
 
-func (g *Game) forPlayer(name string) (*MyGame, error) {
+func (g *Game) ForPlayer(name string) (*MyGame, error) {
 	myGame := &MyGame{}
 	var err error
 
-	i, found := findPlayer(g.Players, name)
+	i, found := FindPlayer(g.Players, name)
 	if !found {
 		return myGame, fmt.Errorf("Player %v doesn't exists in game", name)
 	}
 
-	myGame.Slides = &g.Slides
+	myGame.Slides = g.Slides
 	myGame.Answers = g.Players[i].Answers
-	myGame.Results, err = g.Players[i].results(g.Slides.answerKey())
-	myGame.Correct, myGame.Rankings = g.results()
+	myGame.Results, err = g.Players[i].Results(g.AnswerKey())
+	myGame.Correct, myGame.Rankings = g.Results()
 
 	return myGame, err
 }
 
-func (p *Player) results(correct []int) ([]int, error) {
+func (p *Player) Results(correct []int) ([]int, error) {
 	results := make([]int, len(correct))
 	if len(correct) != len(p.Answers) {
 		return results, fmt.Errorf("Player %v answers to not match answer key", p.Name)
@@ -102,14 +101,14 @@ func (p *Player) results(correct []int) ([]int, error) {
 	return results, nil
 }
 
-func (g *Game) results() ([]int, []Ranking) {
-	answers := g.Slides.answerKey()
+func (g *Game) Results() ([]int, []Ranking) {
+	answers := g.AnswerKey()
 	answer_results := make([]int, len(answers))
 	player_results := make([][]int, len(g.Players))
 	rankings := make([]Ranking, 0, len(g.Players))
 
 	for i := range g.Players {
-		player_results[i], _ = g.Players[i].results(answers)
+		player_results[i], _ = g.Players[i].Results(answers)
 	}
 	for i, player_correct := range player_results {
 		sum := 0
@@ -129,10 +128,33 @@ func (g *Game) results() ([]int, []Ranking) {
 	return answer_results, rankings
 }
 
+func (g *Game) Save(filepath string) error {
+	fmt.Println("Saving game:", filepath)
+
+	f, err := os.OpenFile(filepath, os.O_RDWR|os.O_CREATE, 0755)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	json := jsoniter.ConfigCompatibleWithStandardLibrary
+	b, err := json.Marshal(g)
+	if err != nil {
+		return err
+	}
+
+	_, err = f.Write(b)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func GetGameJSON(filepath string) (*Game, error) {
 	game := &Game{}
 
-	f, err := os.OpenFile("notes.txt", os.O_RDWR|os.O_CREATE, 0755)
+	f, err := os.OpenFile(filepath, os.O_RDWR|os.O_CREATE, 0755)
 	if err != nil {
 		return game, err
 	}
@@ -156,17 +178,26 @@ func GetGameJSON(filepath string) (*Game, error) {
 }
 
 // adds slides to game
-func NewGame(game *Game, slides *Slides) error {
+func NewGame(game *Game, slides *SlideList) error {
 	// TODO: check len of slides
-
-	game.Slides = *slides
+	if len(game.Slides) == 0 {
+		game.Slides = slides.Slides
+	}
 
 	// remove all players?
+	if len(game.Players) > 0 {
+		fmt.Print("Existing players: ")
+		names := []string{}
+		for _, p := range game.Players {
+			names = append(names, p.Name)
+		}
+		fmt.Println(strings.Join(names, ", "))
+	}
 
 	return nil
 }
 
-func findPlayer(players []Player, name string) (int, bool) {
+func FindPlayer(players []Player, name string) (int, bool) {
 	for i, p := range players {
 		if p.Name == name {
 			return i, true

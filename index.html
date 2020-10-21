@@ -24,18 +24,110 @@
     .embla__slide__img {
       position: relative;
       max-width: 100%;
-      max-height: 900px;
+      max-height: 80vh;
+      margin: auto;
     }
     .answered button, .answered input {
       opacity: 0.5;
     }
     .answered .selected {
       opacity: 1.0;
-      background: yellow;
+    }
+    form.question {
+      display: flex;
+      padding: 10px;
+      width: auto;
+      max-width: 80em;
+    }
+
+    @media only screen and (orientation: landscape) {
+      .embla__slide__inner {
+        flex-direction: row;
+      }
+      form.question {
+        min-width: 20vw;
+      }
+    }
+
+    @media only screen and (orientation: portrait) {
+      .embla__slide__inner {
+        flex-direction: column;
+      }
+      form.question {
+        min-width: 80vw;
+      }
+    }
+
+    fieldset {
+      border: none;
+      padding: 1em;
+      width: 100%;
+    }
+
+    fieldset legend {
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+      height: 40px;
+      background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+      border: none;
+      border-radius: 5px;
+      position: relative;
+      border-bottom: 4px solid #2b8bc6;
+      color: #fbfbfb;
+      font-weight: 600;
+      text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+      font-size: 15px;
+      text-align: left;
+      text-indent: 5px;
+      box-shadow: 0px 3px 0px 0px rgba(0,0,0,.2);
+      cursor: pointer;
+
+    /* Just for presentation */  
+      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+    button:active {
+      box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+      top: 1px;
+    }
+
+    button:after {
+      content: "";
+      width: 0;
+      height: 0;
+      display: block;
+      border-top: 20px solid #187dbc;
+      border-bottom: 20px solid #187dbc;
+      border-left: 16px solid transparent;
+      border-right: 20px solid #187dbc;
+      position: absolute;
+      opacity: 0.6; 
+      right: 0;
+      top: 0;
+      border-radius: 0 5px 5px 0;  
+    }
+
+    fieldset ol {
+      list-style: none;
+      line-height: 2em;
     }
   </style>
 </head>
 <body>
+
+  <dialog id="playerDialog">
+    <form method="dialog">
+      <label>Enter your player name:
+        <input id="nameInput" name="name" type="text"/>
+      </label>
+      <menu>
+        <button id="nameConfirmBtn" value="player">Submit</button>
+      </menu>
+    </form>
+  </dialog>
 
     <!-- Embla -->
     <div class="embla">
@@ -49,179 +141,8 @@
 
   <script src="https://unpkg.com/embla-carousel@latest/embla-carousel.umd.js"></script>
 
-  <script type="javascript" src="public/js/trivia.js"></script>
-
-  <script>
-    const wrap = document.querySelector(".embla");
-    const viewPort = wrap.querySelector(".embla__viewport");
-    const slideContainer = viewPort.querySelector(".embla__container");
-
-    const createSlidesFromJSON = (jsonData, container) => {
-      let html = '';
-
-      if (!jsonData.hasOwnProperty('slides') || jsonData.slides == null) {
-        console.log("No slide data in js");
-        return;
-      }
-
-      jsonData.slides.forEach((slide, s) => {
-        html += `
-        <div class="embla__slide">
-          <div class="embla__slide__inner">
-            <img 
-              class="embla__slide__img" 
-              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
-              data-src="public/images/${slide.image}" />`;
-
-        if (slide.hasOwnProperty('question') && slide.hasOwnProperty('answers')) {
-          html += `
-                <form class="question" method="post" action="answer/${s}">
-                  <fieldset>
-                    <legend>${slide.question}</legend>
-                    <ol>`;
-
-          slide.answers.forEach((answer, a) => {
-            let name = `s${s + 1}a${a + 1}`;
-            html += `
-                      <li>
-                        <button name="answer" id="${name}" value="${a+1}">
-                          ${answer}
-                        </buttton>
-                      </li>`;            
-          });
-
-          html += `
-                  </ol>
-                </fieldset>
-              </form>`;
-        }
-        html += `
-          </div>
-        </div>
-        `;
-      });
-      //console.log(html);
-      container.innerHTML = html;
-
-      // set up buttons
-      container.querySelectorAll('button, input').forEach(
-        button => button.addEventListener("click", event => {
-          button.classList.add("selected");
-        })
-      );
-
-      // set up all the forms
-      container.querySelectorAll("form.question").forEach(
-        form => {
-          form.addEventListener("submit", event => {
-            event.preventDefault();
-            console.log("submit form", form, event);
-
-            let formData = new FormData(form);
-            formData.append('player', 'player1');
-            formData.append('answer', event.submitter.value);
-
-            const inputs = form.querySelectorAll('button, input');
-            inputs.forEach(input => { input.disabled = true; });
-
-            fetch(form.action, {
-              method: form.method,
-              body: formData
-            })
-              .then(response => {
-                if (response.ok) {
-                  return Promise.resolve(response);
-                }
-                else {
-                  return Promise.reject(new Error('Failed to load')); 
-                }
-              })
-              .then(data => {
-                console.log(data);
-                // success
-                form.classList.add("answered");
-              })
-              .catch((error) => {
-                console.error('Error:', error);
-                inputs.forEach(input => { input.disabled = false; });
-              });
-            return false;
-          })
-        }
-      );
-      console.log("forms", container.querySelectorAll("form"));
-    };
-
-    const lazyLoad = embla => {
-      const slides = embla.slideNodes();
-      const images = slides.map(slide => slide.querySelector(".embla__slide__img"));
-      console.log(images);
-      const imagesInView = [];
-
-      const addImageLoadEvent = (image, callback) => {
-        image.addEventListener("load", callback);
-        return () => image.removeEventListener("load", callback);
-      };
-
-      const loadImagesInView = () => {
-        embla
-          .slidesInView(true)
-          .filter(index => imagesInView.indexOf(index) === -1)
-          .forEach(loadImageInView);
-      };
-
-      const loadImageInView = index => {
-        const image = images[index];
-        const slide = slides[index];
-        imagesInView.push(index);
-        image.src = image.getAttribute("data-src");
-
-        const removeImageLoadEvent = addImageLoadEvent(image, () => {
-          slide.classList.add("has-loaded");
-          removeImageLoadEvent();
-        });
-      };
-
-      return () => {
-        loadImagesInView();
-        return imagesInView.length === images.length;
-      };
-    };
-
-    const initSlides = data => {
-      createSlidesFromJSON(data, slideContainer);
-      const embla = EmblaCarousel(viewPort);
-      const loadImagesInView = lazyLoad(embla);
-      const loadImagesInViewAndDestroyIfDone = eventName => {
-        const loadedAll = loadImagesInView();
-        if (loadedAll) embla.off(eventName, loadImagesInViewAndDestroyIfDone);
-      };
-
-      embla.on("init", loadImagesInViewAndDestroyIfDone);
-      embla.on("select", loadImagesInViewAndDestroyIfDone);
-      embla.on("resize", loadImagesInViewAndDestroyIfDone);
-    }
-
-    fetch('slides')
-      .then(response => {
-        if (response.ok) {
-          return Promise.resolve(response);
-        }
-        else {
-          return Promise.reject(new Error('Failed to load')); 
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        initSlides(data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-
-
-  </script>
+  <script src="public/js/dialog-polyfill.js"></script>
+  <script src="public/js/trivia.js"></script>
 
 </body>
 </html>

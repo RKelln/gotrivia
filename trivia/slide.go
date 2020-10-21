@@ -1,15 +1,13 @@
-package main
+package trivia
 
 import (
 	"fmt"
 	"io/ioutil"
+
+	jsoniter "github.com/json-iterator/go"
 )
 
-import jsoniter "github.com/json-iterator/go"
-
-const slides_path = "./slides.json"
-
-type Slides struct {
+type SlideList struct {
 	Slides []Slide `json:"slides"`
 }
 
@@ -20,7 +18,7 @@ type Slide struct {
 	CorrectAnswer int      `json:"correct,omitempty"`
 }
 
-func (s *Slides) answerKey() []int {
+func (s *SlideList) AnswerKey() []int {
 	answers := make([]int, len(s.Slides))
 	for i, slide := range s.Slides {
 		answers[i] = slide.CorrectAnswer
@@ -37,8 +35,8 @@ func GetRawSlideJSON(filepath string) (string, error) {
 	return string(str), nil
 }
 
-func GetSlideJSON(filepath string) (*Slides, error) {
-	slides := &Slides{}
+func GetSlideJSON(filepath string) (*SlideList, error) {
+	slides := &SlideList{}
 	str, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		return slides, err

@@ -11,5 +11,6 @@ require (
 	github.com/json-iterator/go v1.1.9
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/pelletier/go-toml v1.8.1 // indirect
+	github.com/thinkerou/favicon v0.1.0
 	golang.org/x/sys v0.0.0-20201018230417-eeed37f84f13 // indirect
 )

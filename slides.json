@@ -1,7 +1,7 @@
 {
   "slides": [
     { 
-      "image": "test1.jpg",
+      "image": "Stephen/test1.jpg",
       "question": "Whose wedding was this taken at?",
       "answers": [
         "Andrew and Lisa",
@@ -10,10 +10,10 @@
       ]
     },
     { 
-      "image": "test2.jpg"
+      "image": "Stephen/test2.jpg"
     },
     { 
-      "image": "test3.jpg",
+      "image": "Stephen/test3.jpg",
       "question": "Question 3",
       "answers": [
         "Andrew and Lisa",
@@ -22,14 +22,71 @@
       ]
     },
     { 
-      "image": "test4.jpg",
+      "image": "Stephen/test4.jpg",
       "question": "Quetion 4",
       "answers": [
         "Andrew and Lisa",
         "Graham and Lindsay",
         "Dallas and Rinat"
       ]
-    }
+    },
+    {
+      "image": "Jessica/DSC_0526.JPG"
+    },
+    {
+      "image": "Jessica/DSC_0604.JPG"
+    },
+    {
+      "image": "Jessica/DSC_0772.JPG"
+    },
+    {
+      "image": "Jessica/Jess_Cherry Knoll.jpg"
+    },
+    {
+      "image": "Jessica/Jess_Colombia 2018.jpg"
+    },
+    {
+      "image": "Jessica/Jess_Graphite.jpg"
+    },
+    {
+      "image": "Jessica/Jess_Muskoka 2019.jpg"
+    },
+    {
+      "image": "Jessica/Jess_Ottawa 2016.jpg"
+    },
+    {
+      "image": "Jessica/Scan1.jpg"
+    },
+    {
+      "image": "Jessica/Scan2.jpg"
+    },
+    {
+      "image": "Jessica/Scan3.jpg"
+    },
+    {
+      "image": "Jessica/Scan4.jpg"
+    },
+    {
+      "image": "Jessica/Scan5.jpg"
+    },
+    {
+      "image": "Jessica/Scan6.jpg"
+    },
+    {
+      "image": "Jessica/Scan7.jpg"
+    },
+    {
+      "image": "Jessica/Scan8.jpg"
+    },
+    {
+      "image": "Jessica/Scan9.jpg"
+    },
+    {
+      "image": "Jessica/Scan10.jpg"
+    },
+    {
+      "image": "Jessica/Scan11.jpg"
+    },
   ]
 }
 
