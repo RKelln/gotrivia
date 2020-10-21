@@ -67,8 +67,6 @@ func postAnswer(c *gin.Context) {
 		c.String(http.StatusBadRequest, fmt.Sprintf("Could not set answer: %v: %v", message, err))
 		return
 	}
-	fmt.Print(game_data)
-
 	myGame(c, player)
 }
 

@@ -30,15 +30,8 @@ const createSlidesFromJSON = (jsonData, container) => {
           data-src="public/images/${slide.image}" />`;
 
     if (slide.hasOwnProperty('question') && slide.hasOwnProperty('answers')) {
-      let classes = "question"; 
-      let player_answer = 0;
-      if (jsonData.hasOwnProperty('answers') && jsonData.answers[s] > 0) {
-        // player has answered this question already
-        classes += ' answered';
-        player_answer = jsonData.answers[s];
-      }
       html += `
-            <form id="question${s}" class="${classes}" data-question="${s}" method="post" action="answer/${s}">
+            <form id="question${s}" class="question" data-question="${s}" method="post" action="answer/${s}">
               <fieldset>
                 <legend>${slide.question}</legend>
                 <ol>`;
@@ -46,13 +39,9 @@ const createSlidesFromJSON = (jsonData, container) => {
       slide.answers.forEach((answer, a) => {
         let value = a + 1;
         let name = `s${s + 1}a${value}`;
-        let classes = "";
-        if (player_answer == value) {
-          classes = "selected";
-        }
         html += `
                   <li>
-                    <button class="${classes}" name="answer" id="${name}" value="${value}" disabled>
+                    <button name="answer" id="${name}" value="${value}" disabled>
                       ${answer}
                     </buttton>
                   </li>`;            
@@ -70,6 +59,8 @@ const createSlidesFromJSON = (jsonData, container) => {
   });
   //console.log(html);
   container.innerHTML = html;
+
+  updateGame(jsonData);
 
   // set up buttons
   container.querySelectorAll('button, input').forEach(
@@ -105,11 +96,8 @@ const createSlidesFromJSON = (jsonData, container) => {
               });
             }
           })
-          .then(data => {
-            console.log(data);
-            // success
-            form.classList.add("answered");
-          })
+          .then(response => response.json())
+          .then(data => updateGame(data))
           .catch((error) => {
             console.error(error);
             alert(error);
@@ -118,6 +106,47 @@ const createSlidesFromJSON = (jsonData, container) => {
       })
     }
   );
+};
+
+const updateGame = data => {
+
+  if (!data.hasOwnProperty('slides') || data.slides == null) {
+    console.log("updateGame: No slide data");
+    return;
+  }
+
+  data.slides.forEach((slide, s) => {
+
+    let question = slideContainer.querySelector("#question" + s);
+    if (!question) return;
+
+    // only need to do once
+    if (question.classList.contains("answered")) return;
+
+    // player answer
+    if (data.hasOwnProperty('answers') && data.answers[s] != 0) {
+      question.classList.add("answered");
+      question.querySelector(`#s${s + 1}a${data.answers[s]}`).classList.add("selected");
+    }
+
+    // player results
+    if (data.hasOwnProperty('results') && data.results[s] != 0) {
+      // indicate correct or incorrect
+      if (data.results[s] > 0) {
+        question.classList.add("correct");
+      } else {
+        question.classList.add("incorrect");
+      }
+    }
+
+    // actual correct answer
+    let correct = 0;
+    if (slide.hasOwnProperty('correct') && slide.correct > 0) {
+      question.querySelector(`#s${s + 1}a${slide.correct}`).classList.add("correct");
+    }
+
+  });
+
 };
 
 const lazyLoad = embla => {
@@ -131,17 +160,18 @@ const lazyLoad = embla => {
   };
 
   const loadImagesInView = () => {
+    // load images in view
     embla
       .slidesInView(true)
       .filter(index => imagesInView.indexOf(index) === -1)
       .forEach(loadImageInView);
-    // TODO: plus load the next image
-    // if (imagesInView.length !== images.length) {
-    //   let last = imagesInView[imagesInView.length-1];
-    //   if (last < images.length - 1) {
-    //     loadImageInView(last);
-    //   }
-    // }
+    // also load the next image not in view
+    if (imagesInView.length > 0 && imagesInView.length !== images.length) {
+      let last = imagesInView[imagesInView.length-1] + 1;
+      if (last < images.length - 1) {
+        loadImageInView(last);
+      }
+    }
   };
 
   const loadImageInView = index => {
@@ -164,7 +194,7 @@ const lazyLoad = embla => {
 
 const initSlides = data => {
   createSlidesFromJSON(data, slideContainer);
-  const embla = EmblaCarousel(viewPort);
+  const embla = EmblaCarousel(viewPort, {loop: true});
   const loadImagesInView = lazyLoad(embla);
   const loadImagesInViewAndDestroyIfDone = eventName => {
     const loadedAll = loadImagesInView();

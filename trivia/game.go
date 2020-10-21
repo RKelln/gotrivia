@@ -17,15 +17,15 @@ type Game struct {
 
 type Player struct {
 	Name    string `json:"name"`
-	Answers []int  `json:"answers,omitempty"`
+	Answers []int  `json:"answers,omitempty"` // player's answers (which answer they answered, 0 = no answer)
 }
 
 type MyGame struct {
 	SlideList
-	Answers  []int     `json:"answers"`
-	Results  []int     `json:"results"`
-	Correct  []int     `json:"correct"`
-	Rankings []Ranking `json:"leaderboard"`
+	Answers  []int     `json:"answers"`     // player's answers (which answer they answered, 0 = no answer)
+	Results  []int     `json:"results"`     // player's answers results (correct = 1, incorrect = -1, n/a = 0)
+	Correct  []int     `json:"correct"`     // number of players who got the correct answer
+	Rankings []Ranking `json:"leaderboard"` // player rankings
 }
 
 type Ranking struct {
@@ -34,7 +34,7 @@ type Ranking struct {
 }
 
 func (g *Game) AddPlayer(p Player) error {
-	if _, found := FindPlayer(g.Players, p.Name); found {
+	if _, found := g.FindPlayer(p.Name); found {
 		return fmt.Errorf("Player %v already exists in game", p.Name)
 	}
 
@@ -48,8 +48,17 @@ func (g *Game) AddPlayer(p Player) error {
 	return nil
 }
 
+func (g *Game) FindPlayer(name string) (int, bool) {
+	for i, p := range g.Players {
+		if p.Name == name {
+			return i, true
+		}
+	}
+	return -1, false
+}
+
 func (g *Game) AddAnswer(name string, slide int, answer int) error {
-	i, found := FindPlayer(g.Players, name)
+	i, found := g.FindPlayer(name)
 	if !found {
 		return fmt.Errorf("Player %v doesn't exists in game", name)
 	}
@@ -68,18 +77,39 @@ func (g *Game) AddAnswer(name string, slide int, answer int) error {
 }
 
 func (g *Game) ForPlayer(name string) (*MyGame, error) {
-	myGame := &MyGame{}
 	var err error
+	myGame := &MyGame{}
 
-	i, found := FindPlayer(g.Players, name)
+	i, found := g.FindPlayer(name)
 	if !found {
 		return myGame, fmt.Errorf("Player %v doesn't exists in game", name)
 	}
 
-	myGame.Slides = g.Slides
+	answerKey := g.AnswerKey()
+	fmt.Println("answerKey", answerKey)
+
 	myGame.Answers = g.Players[i].Answers
-	myGame.Results, err = g.Players[i].Results(g.AnswerKey())
+	fmt.Println(name, "Answers", myGame.Answers)
+
+	myGame.Slides = make([]Slide, len(g.Slides))
+	copy(myGame.Slides, g.Slides)
+	// hide correct answers for unanswered questiosn
+	for i := range myGame.Slides {
+		if myGame.Answers[i] == 0 && answerKey[i] > 0 {
+			fmt.Println(name, "hide answer", i)
+			myGame.Slides[i].CorrectAnswer = 0
+		}
+	}
+
+	myGame.Results, err = g.Players[i].Results(answerKey)
+	if err != nil {
+		return myGame, err
+	}
+	fmt.Println(name, "results", myGame.Results)
+
 	myGame.Correct, myGame.Rankings = g.Results()
+
+	fmt.Println(myGame)
 
 	return myGame, err
 }
@@ -89,8 +119,10 @@ func (p *Player) Results(correct []int) ([]int, error) {
 	if len(correct) != len(p.Answers) {
 		return results, fmt.Errorf("Player %v answers to not match answer key", p.Name)
 	}
+
 	for i := range correct {
-		if correct[i] > 0 {
+		// if player has an answer and there is a correct answer
+		if p.Answers[i] > 0 && correct[i] > 0 {
 			if correct[i] == p.Answers[i] {
 				results[i] = 1
 			} else {
@@ -98,6 +130,7 @@ func (p *Player) Results(correct []int) ([]int, error) {
 			}
 		}
 	}
+
 	return results, nil
 }
 
@@ -178,30 +211,26 @@ func GetGameJSON(filepath string) (*Game, error) {
 }
 
 // adds slides to game
-func NewGame(game *Game, slides *SlideList) error {
-	// TODO: check len of slides
-	if len(game.Slides) == 0 {
-		game.Slides = slides.Slides
+func NewGame(g *Game, s *SlideList) error {
+
+	if len(g.Slides) == 0 {
+		g.Slides = s.Slides
+	}
+
+	if len(g.Slides) != len(s.Slides) {
+		g.Slides = s.Slides
+		g.Players = nil // clear existing players
 	}
 
 	// remove all players?
-	if len(game.Players) > 0 {
+	if len(g.Players) > 0 {
 		fmt.Print("Existing players: ")
 		names := []string{}
-		for _, p := range game.Players {
+		for _, p := range g.Players {
 			names = append(names, p.Name)
 		}
 		fmt.Println(strings.Join(names, ", "))
 	}
 
 	return nil
-}
-
-func FindPlayer(players []Player, name string) (int, bool) {
-	for i, p := range players {
-		if p.Name == name {
-			return i, true
-		}
-	}
-	return -1, false
 }

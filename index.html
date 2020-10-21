@@ -33,6 +33,16 @@
     .answered .selected {
       opacity: 1.0;
     }
+    .answered.correct .selected {
+      background: green;
+    }
+    .answered.incorrect .selected {
+      background: red;
+    }
+    .answered.incorrect .correct {
+      background: green;
+    }
+
     form.question {
       display: flex;
       padding: 10px;

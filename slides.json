@@ -7,7 +7,8 @@
         "Andrew and Lisa",
         "Graham and Lindsay",
         "Dallas and Rinat"
-      ]
+      ],
+      "correct": 1
     },
     { 
       "image": "Stephen/test2.jpg"
@@ -19,7 +20,8 @@
         "Andrew and Lisa",
         "Graham and Lindsay",
         "Dallas and Rinat"
-      ]
+      ],
+      "correct": 2
     },
     { 
       "image": "Stephen/test4.jpg",
@@ -28,7 +30,8 @@
         "Andrew and Lisa",
         "Graham and Lindsay",
         "Dallas and Rinat"
-      ]
+      ],
+      "correct": 3
     },
     {
       "image": "Jessica/DSC_0526.JPG"
@@ -86,7 +89,7 @@
     },
     {
       "image": "Jessica/Scan11.jpg"
-    },
+    }
   ]
 }
 
