@@ -1,5 +1,3 @@
-/* trivia.js */
-console.log("trivia.js")
 
 const wrap = document.querySelector(".embla");
 const viewPort = wrap.querySelector(".embla__viewport");
@@ -61,7 +59,6 @@ const createSlidesFromJSON = (jsonData, container) => {
     </div>
     `;
   });
-  //console.log(html);
   container.innerHTML = html;
 
   updateGame(jsonData);

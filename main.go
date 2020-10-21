@@ -26,16 +26,17 @@ const slides_path = "./slides.json"
 const game_path = "./game.json"
 const port = ":8080"
 
-func localIP() {
+func localIP() string {
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
 		panic(err)
 	}
 	for _, addr := range addrs {
 		if strings.HasPrefix(addr.String(), "192") {
-			fmt.Printf("Local address: %v%v\n", strings.TrimSuffix(addr.String(), "/24"), port)
+			return fmt.Sprintf("%v%v", strings.TrimSuffix(addr.String(), "/24"), port)
 		}
 	}
+	return "unknown"
 }
 
 func myGame(c *gin.Context, playerName string) {
@@ -73,7 +74,9 @@ func postAnswer(c *gin.Context) {
 func main() {
 	var err error
 
-	localIP()
+	fmt.Println("\n******************************************")
+	fmt.Printf("* Local address: %v\n", localIP())
+	fmt.Println("******************************************\n")
 
 	slide_data, err = trivia.GetSlideJSON(slides_path)
 	if err != nil {

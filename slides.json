@@ -5,36 +5,52 @@
       "question": "Whose wedding was this taken at?",
       "answers": [
         "Andrew and Lisa",
-        "Graham and Lindsay",
-        "Dallas and Rinat"
+        "Dallas and Rinat",
+        "Graham and Lindsay"
+      ],
+      "correct": 3
+    },
+    { 
+      "image": "Stephen/test2.jpg",
+      "question": "Where is Stephen going?",
+      "answers": [
+        "Moosejaw to visit his brother",
+        "Varadero for a vacation",
+        "Thailand with his choir"
+      ],
+      "correct": 3
+    },
+    { 
+      "image": "Stephen/test3.jpg",
+      "question": "Whose wedding was this taken at?",
+      "answers": [
+        "Andrew and Lisa",
+        "Dallas and Rinat",
+        "Graham and Lindsay"
       ],
       "correct": 1
     },
     { 
-      "image": "Stephen/test2.jpg"
-    },
-    { 
-      "image": "Stephen/test3.jpg",
-      "question": "Question 3",
+      "image": "Stephen/test4.jpg",
+      "question": "What was the theme of this Halloween party?",
       "answers": [
-        "Andrew and Lisa",
-        "Graham and Lindsay",
-        "Dallas and Rinat"
+        "Gangsta 4 Life",
+        "Saturday Night Live",
+        "Mexican Fever"
       ],
       "correct": 2
     },
-    { 
-      "image": "Stephen/test4.jpg",
-      "question": "Quetion 4",
-      "answers": [
-        "Andrew and Lisa",
-        "Graham and Lindsay",
-        "Dallas and Rinat"
-      ],
-      "correct": 3
-    },
     {
-      "image": "Jessica/DSC_0526.JPG"
+      "image": "Jessica/DSC_0526.JPG",
+      "question": "How many flamingoes?",
+      "answers": [
+        "32",
+        "33",
+        "34",
+        "35",
+        "36"
+      ],
+      "correct": 4
     },
     {
       "image": "Jessica/DSC_0604.JPG"
@@ -43,7 +59,15 @@
       "image": "Jessica/DSC_0772.JPG"
     },
     {
-      "image": "Jessica/Jess_Cherry Knoll.jpg"
+      "image": "Jessica/Jess_Cherry Knoll.jpg",
+      "question": "What annual familycookout was this taken at?",
+      "answers": [
+        "Cherry Knoll",
+        "Apple Pine",
+        "Muskoka Lake",
+        "The Eagle's Nest"
+      ],
+      "correct": 1
     },
     {
       "image": "Jessica/Jess_Colombia 2018.jpg"
@@ -79,7 +103,16 @@
       "image": "Jessica/Scan7.jpg"
     },
     {
-      "image": "Jessica/Scan8.jpg"
+      "image": "Jessica/Scan8.jpg",
+      "question": "In grade 12 where did Jessica cruise?",
+      "answers": [
+        "Alaska",
+        "Bahamas",
+        "Mediterranean",
+        "Iceland",
+        "Trinidad"
+      ],
+      "correct": 3
     },
     {
       "image": "Jessica/Scan9.jpg"

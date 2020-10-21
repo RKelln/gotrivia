@@ -87,30 +87,28 @@ func (g *Game) ForPlayer(name string) (*MyGame, error) {
 	}
 
 	answerKey := g.AnswerKey()
-	fmt.Println("answerKey", answerKey)
 
+	// my answers
 	myGame.Answers = g.Players[i].Answers
-	fmt.Println(name, "Answers", myGame.Answers)
 
+	// my slides (with unanswered correct answer info removed)
 	myGame.Slides = make([]Slide, len(g.Slides))
 	copy(myGame.Slides, g.Slides)
 	// hide correct answers for unanswered questiosn
 	for i := range myGame.Slides {
 		if myGame.Answers[i] == 0 && answerKey[i] > 0 {
-			fmt.Println(name, "hide answer", i)
 			myGame.Slides[i].CorrectAnswer = 0
 		}
 	}
 
+	// my results
 	myGame.Results, err = g.Players[i].Results(answerKey)
 	if err != nil {
 		return myGame, err
 	}
-	fmt.Println(name, "results", myGame.Results)
 
+	// other player results
 	myGame.Correct, myGame.Completed, myGame.Rankings = g.Results()
-
-	fmt.Println(myGame)
 
 	return myGame, err
 }
@@ -169,20 +167,13 @@ func (g *Game) Results() ([]int, []int, []Ranking) {
 func (g *Game) Save(filepath string) error {
 	fmt.Println("Saving game:", filepath)
 
-	f, err := os.OpenFile(filepath, os.O_RDWR|os.O_CREATE, 0755)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
 	json := jsoniter.ConfigCompatibleWithStandardLibrary
-	b, err := json.Marshal(g)
+	jsonString, err := json.MarshalIndent(g, "", " ")
 	if err != nil {
 		return err
 	}
 
-	_, err = f.Write(b)
-	if err != nil {
+	if err := ioutil.WriteFile(filepath, jsonString, 0644); err != nil {
 		return err
 	}
 
