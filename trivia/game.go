@@ -22,10 +22,11 @@ type Player struct {
 
 type MyGame struct {
 	SlideList
-	Answers  []int     `json:"answers"`     // player's answers (which answer they answered, 0 = no answer)
-	Results  []int     `json:"results"`     // player's answers results (correct = 1, incorrect = -1, n/a = 0)
-	Correct  []int     `json:"correct"`     // number of players who got the correct answer
-	Rankings []Ranking `json:"leaderboard"` // player rankings
+	Answers   []int     `json:"answers"`     // player's answers (which answer they answered, 0 = no answer)
+	Results   []int     `json:"results"`     // player's answers results (correct = 1, incorrect = -1, n/a = 0)
+	Completed []int     `json:"completed"`   // number of players who have completed answers
+	Correct   []int     `json:"correct"`     // number of players who got the correct answer
+	Rankings  []Ranking `json:"leaderboard"` // player rankings
 }
 
 type Ranking struct {
@@ -107,7 +108,7 @@ func (g *Game) ForPlayer(name string) (*MyGame, error) {
 	}
 	fmt.Println(name, "results", myGame.Results)
 
-	myGame.Correct, myGame.Rankings = g.Results()
+	myGame.Correct, myGame.Completed, myGame.Rankings = g.Results()
 
 	fmt.Println(myGame)
 
@@ -134,31 +135,35 @@ func (p *Player) Results(correct []int) ([]int, error) {
 	return results, nil
 }
 
-func (g *Game) Results() ([]int, []Ranking) {
+func (g *Game) Results() ([]int, []int, []Ranking) {
 	answers := g.AnswerKey()
-	answer_results := make([]int, len(answers))
-	player_results := make([][]int, len(g.Players))
+	all_correct := make([]int, len(answers))
+	all_answered := make([]int, len(answers))
+	all_player_results := make([][]int, len(g.Players))
 	rankings := make([]Ranking, 0, len(g.Players))
 
 	for i := range g.Players {
-		player_results[i], _ = g.Players[i].Results(answers)
+		all_player_results[i], _ = g.Players[i].Results(answers)
 	}
-	for i, player_correct := range player_results {
-		sum := 0
-		for j := range player_correct {
-			if player_correct[j] > 0 {
-				sum += player_correct[j]
-				answer_results[j] += 1
+	for i, player_results := range all_player_results {
+		sum_correct := 0
+		for j := range player_results {
+			if player_results[j] > 0 {
+				sum_correct += player_results[j]
+				all_correct[j] += 1
+			}
+			if player_results[j] != 0 {
+				all_answered[j] += 1
 			}
 		}
-		rankings = append(rankings, Ranking{Name: g.Players[i].Name, Points: sum})
+		rankings = append(rankings, Ranking{Name: g.Players[i].Name, Points: sum_correct})
 	}
 
 	sort.SliceStable(rankings, func(i, j int) bool {
 		return rankings[i].Points < rankings[j].Points
 	})
 
-	return answer_results, rankings
+	return all_correct, all_answered, rankings
 }
 
 func (g *Game) Save(filepath string) error {

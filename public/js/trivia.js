@@ -49,8 +49,12 @@ const createSlidesFromJSON = (jsonData, container) => {
 
       html += `
               </ol>
+              <p class="results">
+                <span class="numCorrect"></span> of <span class="numCompleted"></span> guests anwered this correctly.
+              </p>
             </fieldset>
           </form>`;
+
     }
     html += `
       </div>
@@ -143,6 +147,12 @@ const updateGame = data => {
     let correct = 0;
     if (slide.hasOwnProperty('correct') && slide.correct > 0) {
       question.querySelector(`#s${s + 1}a${slide.correct}`).classList.add("correct");
+    }
+
+    // number correct vs completed
+    if (data.hasOwnProperty('correct') && data.hasOwnProperty('completed')) {
+      question.querySelector(`.numCorrect`).textContent = data.correct[s];
+      question.querySelector(`.numCompleted`).textContent = data.completed[s];
     }
 
   });
