@@ -1,27 +1,7 @@
 {
   "slides": [
-    { 
-      "image": "Stephen/test1.jpg",
-      "question": "Whose wedding was this taken at?",
-      "answers": [
-        "Andrew and Lisa",
-        "Dallas and Rinat",
-        "Graham and Lindsay"
-      ],
-      "correct": 3
-    },
-    { 
-      "image": "Stephen/test2.jpg",
-      "question": "Where is Stephen going?",
-      "answers": [
-        "Moosejaw to visit his brother",
-        "Varadero for a vacation",
-        "Thailand with his choir"
-      ],
-      "correct": 3
-    },
-    { 
-      "image": "Stephen/test3.jpg",
+    {
+      "image": "Stephen/wedding1.jpg",
       "question": "Whose wedding was this taken at?",
       "answers": [
         "Andrew and Lisa",
@@ -30,8 +10,30 @@
       ],
       "correct": 1
     },
-    { 
-      "image": "Stephen/test4.jpg",
+    {
+      "image": "Stephen/games_day_at_pits.jpg",
+      "question": "Every January 1st Stphen makes pankcakes and plays board games at?",
+      "answers": [
+        "His brothers",
+        "\"The Pits\"",
+        "His friend Brian's",
+        "His own apartment",
+        "\"The Secret Lair\""
+      ],
+      "correct": 2
+    },
+    {
+      "image": "Stephen/wedding2.jpg",
+      "question": "Whose wedding was this taken at?",
+      "answers": [
+        "Andrew and Lisa",
+        "Dallas and Rinat",
+        "Graham and Lindsay"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "Stephen/halloween.jpg",
       "question": "What was the theme of this Halloween party?",
       "answers": [
         "Gangsta 4 Life",
@@ -41,7 +43,88 @@
       "correct": 2
     },
     {
-      "image": "Jessica/DSC_0526.JPG",
+      "image": "Stephen/demo_party.jpg",
+      "question": "Why is Stephen writing on the wall?",
+      "answers": [
+        "He has a terrible memory",
+        "Revenge",
+        "The end of an era",
+        "RICE!",
+        "There is no stopping Stephen"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "Stephen/img_6600.jpg",
+      "question": "Why is Stephen pouring water on his head?",
+      "answers": [
+        "Photo scavanger hunt",
+        "Ice bucket challenge",
+        "It's damn hot",
+        "Forgot to take a shower",
+        "Michelle dared him"
+      ],
+      "correct": 1
+    },
+    {
+      "image": "Stephen/midnight_madness.jpg",
+      "question": "Stephen loves going to shows, what one is this?",
+      "answers": [
+        "The Cat Empire at the Danforth",
+        "TIFF Midnight Madness at Ryerson",
+        "DJ Shagz at the Rivoli",
+        "Olafur Arnalds at Roy Thompson"
+      ],
+      "correct": 2
+    },
+    {
+      "image": "Stephen/starwars.jpg",
+      "question": "Who made this for school?",
+      "answers": [
+        "Jessica",
+        "Stephen",
+        "Matt"
+      ],
+      "correct": 2
+    },
+    {
+      "image": "Stephen/airport.jpg",
+      "question": "Where is Stephen going?",
+      "answers": [
+        "Cuba with his choir",
+        "Moosejaw to visit his brother",
+        "Varadero for a vacation",
+        "Thailand with his choir"
+      ],
+      "correct": 1
+    },
+    {
+      "image": "Stephen/univox_carol.jpg",
+      "question": "Stephen loves to sing, what is the name of his choir?",
+      "answers": [
+        "Florivox Choir",
+        "Unity Choir",
+        "Univox Choir",
+        "Voxx Singers"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "Stephen/univox_men.jpg",
+      "question": "What part does Stephen sing in the choir?",
+      "answers": [
+        "Tenor 1",
+        "Tenor 2",
+        "Baritone",
+        "Bass"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "Stephen/xmas_2016.jpg"
+    },
+    {
+      "image": "Jessica/DSC_0526.jpg",
       "question": "How many flamingoes?",
       "answers": [
         "32",
@@ -53,10 +136,37 @@
       "correct": 4
     },
     {
-      "image": "Jessica/DSC_0604.JPG"
+      "image": "Jessica/DSC_0604.jpg"
     },
     {
-      "image": "Jessica/DSC_0772.JPG"
+      "image": "Jessica/DSC_0772.jpg"
+    },
+    {
+      "image": "Jessica/IMG_0673.jpg"
+    },
+    {
+      "image": "Jessica/IMG_0741.jpg"
+    },
+    {
+      "image": "Jessica/IMG_1009.jpg"
+    },
+    {
+      "image": "Jessica/IMG_2113.jpg"
+    },
+    {
+      "image": "Jessica/IMG_3915.jpg"
+    },
+    {
+      "image": "Jessica/IMG_3923.jpg"
+    },
+    {
+      "image": "Jessica/IMG_4841.jpg"
+    },
+    {
+      "image": "Jessica/IMG_8846.jpg"
+    },
+    {
+      "image": "Jessica/IMG_9920-2.jpg"
     },
     {
       "image": "Jessica/Jess_Cherry Knoll.jpg",
@@ -105,13 +215,13 @@
     {
       "image": "Jessica/Scan8.jpg",
       "question": "In grade 12 where did Jessica cruise?",
-      "answers": [
-        "Alaska",
-        "Bahamas",
-        "Mediterranean",
-        "Iceland",
-        "Trinidad"
-      ],
+        "answers": [
+          "Alaska",
+          "Bahamas",
+          "Mediterranean",
+          "Iceland",
+          "Trinidad"
+        ],
       "correct": 3
     },
     {
@@ -122,6 +232,144 @@
     },
     {
       "image": "Jessica/Scan11.jpg"
+    },
+    {
+      "image": "both/aquarium.jpg"
+    },
+    {
+      "image": "both/birthday.jpg"
+    },
+    {
+      "image": "both/covid_cake.jpg"
+    },
+    {
+      "image": "both/cutting_cake.jpg"
+    },
+    {
+      "image": "both/home_church.jpg"
+    },
+    {
+      "image": "both/image3.jpg"
+    },
+    {
+      "image": "both/IMG_2299.jpg"
+    },
+    {
+      "image": "both/IMG_2610.jpg"
+    },
+    {
+      "image": "both/IMG_2705.jpg"
+    },
+    {
+      "image": "both/IMG_2740.jpg"
+    },
+    {
+      "image": "both/IMG_3390.jpg"
+    },
+    {
+      "image": "both/IMG_3435.jpg"
+    },
+    {
+      "image": "both/IMG_3592.jpg"
+    },
+    {
+      "image": "both/IMG_3873.jpg"
+    },
+    {
+      "image": "both/IMG_3934.jpg"
+    },
+    {
+      "image": "both/IMG_4146.jpg"
+    },
+    {
+      "image": "both/IMG_4149.jpg"
+    },
+    {
+      "image": "both/IMG_4745.jpg"
+    },
+    {
+      "image": "both/IMG_4758.jpg"
+    },
+    {
+      "image": "both/IMG_4976.jpg"
+    },
+    {
+      "image": "both/IMG_5024.jpg"
+    },
+    {
+      "image": "both/IMG_5108.jpg"
+    },
+    {
+      "image": "both/IMG_5146.jpg"
+    },
+    {
+      "image": "both/IMG_5300.jpg"
+    },
+    {
+      "image": "both/IMG_5395.jpg"
+    },
+    {
+      "image": "both/IMG_5786.jpg"
+    },
+    {
+      "image": "both/IMG_6120.jpg"
+    },
+    {
+      "image": "both/IMG_6203.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-004.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-005.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-006.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-008.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-016.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-050.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-052.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-058.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-068.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-069.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-092.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-093.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-095.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-097.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-118.jpg"
+    },
+    {
+      "image": "both/no_touching.jpg"
+    },
+    {
+      "image": "both/RSTD2092.jpg"
+    },
+    {
+      "image": "both/uhoh.jpg"
     }
   ]
 }

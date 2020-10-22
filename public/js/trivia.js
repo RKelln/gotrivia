@@ -224,6 +224,18 @@ const initSlides = data => {
     enableQuestion(form, true);
     embla.scrollTo(form.dataset.question);
   }
+
+  // listen to keys
+  document.addEventListener('keyup', (e) => {
+    switch (e.code) {
+      case 'ArrowRight':
+        embla.scrollNext()
+        break;
+      case 'ArrowLeft':
+        embla.scrollPrev()
+        break;
+    }
+  });
 }
 
 /*
