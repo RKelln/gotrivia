@@ -2,14 +2,13 @@ Wedding Trivia
 ==============
 
 The images are kept in `public/images/`.
-The list of slides and associated questions in in `slides.json`.
+The list of slides and associated questions is in `slides.json`.
 
 
 Installation
 ============
 
 Unzip into a directory. 
-
 
 
 Getting Started

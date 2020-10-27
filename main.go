@@ -64,6 +64,12 @@ func postAnswer(c *gin.Context) {
 	message := fmt.Sprintf("%v answered slide %v with %v", player, slide, answer)
 	fmt.Println(message)
 
+	// add player if they don't exist
+	_, found := game_data.FindPlayer(player)
+	if !found {
+		game_data.AddPlayer(trivia.Player{Name: player})
+	}
+
 	if err := game_data.AddAnswer(player, slide, answer); err != nil {
 		c.String(http.StatusBadRequest, fmt.Sprintf("Could not set answer: %v: %v", message, err))
 		return
