@@ -59,14 +59,14 @@ fieldset legend {
 button {
   width: 100%;
   height: 40px;
-  background: linear-gradient(to bottom, #4eb5e5 0%,#389ed5 100%); /* W3C */
+  background: linear-gradient(to bottom, #3b90b7 0%,#23698e 100%); /* W3C */
   border: none;
   border-radius: 5px;
   position: relative;
-  border-bottom: 4px solid #2b8bc6;
+  border-bottom: 1px solid #2b8bc6;
   color: #fbfbfb;
   font-weight: 600;
-  text-shadow: 1px 1px 1px rgba(0,0,0,.4);
+  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
   font-size: 15px;
   text-align: left;
   text-indent: 5px;
@@ -87,10 +87,10 @@ button:after {
   width: 0;
   height: 0;
   display: block;
-  border-top: 20px solid #187dbc;
-  border-bottom: 20px solid #187dbc;
+  border-top: 20px solid #02020254;
+  border-bottom: 20px solid #02020254;
   border-left: 16px solid transparent;
-  border-right: 20px solid #187dbc;
+  border-right: 20px solid #02020254;
   position: absolute;
   opacity: 0.6; 
   right: 0;
