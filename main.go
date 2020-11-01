@@ -24,7 +24,7 @@ var game_data *trivia.Game
 
 const slides_path = "./slides.json"
 const game_path = "./game.json"
-const port = ":8080"
+const Port = "8080"
 
 func localIP() string {
 	addrs, err := net.InterfaceAddrs()
@@ -33,7 +33,11 @@ func localIP() string {
 	}
 	for _, addr := range addrs {
 		if strings.HasPrefix(addr.String(), "192") {
-			return fmt.Sprintf("%v%v", strings.TrimSuffix(addr.String(), "/24"), port)
+			address := strings.TrimSuffix(addr.String(), "/24")
+			if len(Port) > 0 {
+				address = fmt.Sprintf("%v:%v", address, Port)
+			}
+			return address
 		}
 	}
 	return "unknown"
@@ -102,6 +106,11 @@ func main() {
 	router := gin.Default()
 	router.Use(favicon.New("./public/favicon.ico"))
 
+	// for debugging, limit caching
+	// router.Use(func(c *gin.Context) {
+	// 	c.Header("Cache-Control", "max-age=5")
+	// })
+
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
@@ -126,13 +135,12 @@ func main() {
 
 	router.Static("/public", "./public")
 	router.StaticFile("/", "index.html")
-	router.StaticFile("/favicon.ico", "./public/favicon.ico")
 
 	//router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
 	// TODO: add port setting
 	srv := &http.Server{
-		Addr:    port,
+		Addr:    ":" + Port,
 		Handler: router,
 	}
 

@@ -19,6 +19,7 @@ const createSlidesFromJSON = (jsonData, container) => {
   }
 
   jsonData.slides.forEach((slide, s) => {
+    let question_num = s + 1;
     html += `
     <div class="embla__slide">
       <div class="embla__slide__inner">
@@ -31,12 +32,12 @@ const createSlidesFromJSON = (jsonData, container) => {
       html += `
             <form id="question${s}" class="question" data-question="${s}" method="post" action="answer/${s}">
               <fieldset>
-                <legend>${slide.question}</legend>
+                <legend><span class="number">${question_num}</span>${slide.question}</legend>
                 <ol>`;
 
       slide.answers.forEach((answer, a) => {
         let value = a + 1;
-        let name = `s${s + 1}a${value}`;
+        let name = `s${question_num}a${value}`;
         html += `
                   <li>
                     <button name="answer" id="${name}" value="${value}" disabled>
@@ -76,16 +77,18 @@ const createSlidesFromJSON = (jsonData, container) => {
       form.addEventListener("submit", event => {
         event.preventDefault();
 
+        //let answer = event.submitter.value; // doesn't work on Safari
+        let answer = event.target.querySelector('.selected').value;
+
         let formData = new FormData(form);
         formData.append('player', playerName);
-        formData.append('answer', event.submitter.value);
+        formData.append('answer', answer);
 
         enableQuestion(form, false);
 
         fetch(form.action, {
           method: form.method,
-          body: formData,
-          credentials: 'same-origin'
+          body: formData
         })
           .then(response => {
             if (response.ok) {
@@ -154,6 +157,13 @@ const updateGame = data => {
 
   });
 
+  let answeredQuestions = slideContainer.querySelectorAll(".question.answered");
+  console.log("Answered questions:", answeredQuestions);
+
+  // if first question that was answered, show help tip to wipe for other images
+  if (answeredQuestions != null && answeredQuestions.length == 1) {
+    alert("Swipe left and right to move between questions");
+  }
 };
 
 const lazyLoad = embla => {
@@ -291,7 +301,7 @@ const setPlayerName = name => {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      //console.log(data);
       initSlides(data);
     })
     .catch(error => {
@@ -324,6 +334,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
       .split('=')[1];
     setPlayerName(name);
   }
-
 });
-
