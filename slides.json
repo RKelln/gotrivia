@@ -71,7 +71,7 @@
     },
     {
       "image": "Jessica/Scan4.jpg",
-      "question": "What TV show did JEssica NOT love watching as a teenager?",
+      "question": "What TV show did Jessica NOT love watching as a teenager?",
       "answers": [
         "Veronica Mars",
         "The West Wing",
@@ -108,6 +108,16 @@
         "Canadian Idol"
       ],
       "correct": 1
+    },
+    {
+      "image": "Jessica/jess_gramma.jpg",
+      "question": "Why did Grandma Bauman use to call a young Jessica \"the little tractor?\"",
+      "answers": [
+        "Jessica played with a toy tractor",
+        "Jessica liked to dig up vegetables ",
+        "Jessica made noises with her tongue when she cried"
+      ],
+      "correct": 3
     },
     {
       "image": "both/IMG_3435.jpg",
@@ -198,6 +208,235 @@
       ],
       "correct": 2
 
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-092.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-093.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-097.jpg"
+    },
+    {
+      "image": "both/IMG_6120.jpg"
+    },
+    {
+      "image": "both/no_touching.jpg"
+    },
+    {
+      "image": "both/IMG_2610.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-016.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-058.jpg"
+    },
+    {
+      "image": "both/IMG_4745.jpg"
+    },
+    {
+      "image": "both/IMG_3592.jpg"
+    },
+    {
+      "image": "both/covid_cake.jpg"
+    },
+    {
+      "image": "both/IMG_3934.jpg"
+    },
+    {
+      "image": "both/IMG_4758.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-005.jpg"
+    },
+    {
+      "image": "both/IMG_5300.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-006.jpg"
+    },
+    {
+      "image": "both/IMG_6203.jpg"
+    },
+    {
+      "image": "both/IMG_5786.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-008.jpg"
+    },
+    {
+      "image": "both/uhoh.jpg"
+    },
+    {
+      "image": "both/IMG_5146.jpg"
+    },
+    {
+      "image": "both/IMG_3390.jpg"
+    },
+    {
+      "image": "both/IMG_2705.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-004.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-050.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-095.jpg"
+    },
+    {
+      "image": "both/IMG_4976.jpg"
+    },
+    {
+      "image": "both/IMG_4149.jpg"
+    },
+    {
+      "image": "both/IMG_2740.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-052.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-118.jpg"
+    },
+    {
+      "image": "both/home_church.jpg"
+    },
+    {
+      "image": "both/birthday.jpg"
+    },
+    {
+      "image": "both/IMG_4146.jpg"
+    },
+    {
+      "image": "both/IMG_3873.jpg"
+    },
+    {
+      "image": "both/IMG_2299.jpg"
+    },
+    {
+      "image": "both/image3.jpg"
+    },
+    {
+      "image": "both/IMG_5108.jpg"
+    },
+    {
+      "image": "both/cutting_cake.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-069.jpg"
+    },
+    {
+      "image": "both/RSTD2092.jpg"
+    },
+    {
+      "image": "both/aquarium.jpg"
+    },
+    {
+      "image": "both/IMG_5024.jpg"
+    },
+    {
+      "image": "Jessica/DSC_0772.jpg"
+    },
+    {
+      "image": "Jessica/IMG_0741.jpg"
+    },
+    {
+      "image": "Jessica/Scan9.jpg"
+    },
+    {
+      "image": "Jessica/DSC_0604.jpg"
+    },
+    {
+      "image": "Jessica/camping.jpg"
+    },
+    {
+      "image": "Jessica/IMG_3923.jpg"
+    },
+    {
+      "image": "Jessica/IMG_0673.jpg"
+    },
+    {
+      "image": "Jessica/Scan1.jpg"
+    },
+    {
+      "image": "Jessica/Scan11.jpg"
+    },
+    {
+      "image": "Jessica/Jess_Colombia 2018.jpg"
+    },
+    {
+      "image": "Jessica/IMG_2113.jpg"
+    },
+    {
+      "image": "Jessica/IMG_4841.jpg"
+    },
+    {
+      "image": "Jessica/DSC_0526.jpg"
+    },
+    {
+      "image": "Jessica/Scan6.jpg"
+    },
+    {
+      "image": "Jessica/Scan3.jpg"
+    },
+    {
+      "image": "Jessica/IMG_3915.jpg"
+    },
+    {
+      "image": "Jessica/Scan2.jpg"
+    },
+    {
+      "image": "Jessica/IMG_1009.jpg"
+    },
+    {
+      "image": "Jessica/Scan10.jpg"
+    },
+    {
+    "image": "Jessica/IMG_8846.jpg"
+    },
+    {
+    "image": "Jessica/IMG_9920-2.jpg"
+    },
+    {
+    "image": "Jessica/Scan5.jpg"
+    },
+    {
+    "image": "Jessica/Jess_Ottawa 2016.jpg"
+    },
+    {
+      "image": "Stephen/xmas_2016.jpg"
+    },
+    {
+      "image": "Stephen/airport.jpg"
+    },
+    {
+      "image": "Stephen/midnight_madness.jpg"
+    },
+    {
+      "image": "Stephen/univox_carol.jpg"
+    },
+    {
+      "image": "Stephen/starwars.jpg"
+    },
+    {
+      "image": "Stephen/halloween.jpg"
+    },
+    {
+      "image": "Stephen/demo_party.jpg"
+    },
+    {
+      "image": "Stephen/I_am_blinded.jpg"
+    },
+    {
+      "image": "Stephen/wedding1.jpg"
+    },
+    {
+      "image": "Stephen/lake.jpg"
     }
   ]
 }
+
