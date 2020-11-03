@@ -1,30 +1,27 @@
 {
-  "slides": [
-    {
-      "image": "Stephen/wedding1.jpg",
-      "question": "Whose wedding was this taken at?",
+  "slides": [{
+      "image": "Stephen/stiff_film_fest.jpg",
+      "question": "Stephen organized and hosted his very own Film Festival. What was the Festival called?",
       "answers": [
-        "Andrew and Lisa",
-        "Dallas and Rinat",
-        "Graham and Lindsay"
+        "STIFF - Stephen International Film Festival",
+        "The Festival of Festival of Festivals",
+        "The CAN Film Festival"
       ],
       "correct": 1
     },
     {
-      "image": "Stephen/games_day_at_pits.jpg",
-      "question": "Every January 1st Stphen makes pankcakes and plays board games at?",
+      "image": "Jessica/P1010674.jpg",
+      "question": "Which sister did Jess share a bedroom with as a child?",
       "answers": [
-        "His brothers",
-        "\"The Pits\"",
-        "His friend Brian's",
-        "His own apartment",
-        "\"The Secret Lair\""
+        "Emily",
+        "Stephanie",
+        "Laura"
       ],
-      "correct": 2
+      "correct": 3
     },
     {
       "image": "Stephen/wedding2.jpg",
-      "question": "Whose wedding was this taken at?",
+      "question": "At whose wedding was this photo taken?",
       "answers": [
         "Andrew and Lisa",
         "Dallas and Rinat",
@@ -33,26 +30,93 @@
       "correct": 3
     },
     {
-      "image": "Stephen/halloween.jpg",
-      "question": "What was the theme of this Halloween party?",
+      "image": "Jessica/DSC07114.jpg",
+      "question": "Which grade did Jessica skip?",
       "answers": [
-        "Gangsta 4 Life",
-        "Saturday Night Live",
-        "Mexican Fever"
+        "Grade 3",
+        "Grade 7",
+        "Grade 5"
       ],
       "correct": 2
     },
     {
-      "image": "Stephen/demo_party.jpg",
-      "question": "Why is Stephen writing on the wall?",
+      "image": "Stephen/games_day_at_pits.jpg",
+      "question": "Every January 1st, Stphen makes pankcakes and plays board games at...?",
       "answers": [
-        "He has a terrible memory",
-        "Revenge",
-        "The end of an era",
-        "RICE!",
-        "There is no stopping Stephen"
+        "His brothers",
+        "\"The Pits\"",
+        "His friend Brian's"
+      ],
+      "correct": 2
+    },
+    {
+      "image": "Jessica/PC190062.jpg",
+      "question": "For which company did Jessica work for 5 and a half years?",
+      "answers": [
+        "Second Cup",
+        "The Shoe Company",
+        "Shoppers Drug Mart"
       ],
       "correct": 3
+    },
+    {
+      "image": "Stephen/dj_shagz_suit.jpg",
+      "question": "Which internationally renowned electronic group did Stephen (a.k.a DJ Shagz) open for 2009?",
+      "answers": [
+        "The Prodigy",
+        "The Crystal Method",
+        "Daft Punk"
+      ],
+      "correct": 2
+    },
+    {
+      "image": "Jessica/Scan4.jpg",
+      "question": "What TV show did JEssica NOT love watching as a teenager?",
+      "answers": [
+        "Veronica Mars",
+        "The West Wing",
+        "Bones"
+      ],
+      "correct": 2
+    },
+    {
+      "image": "Stephen/ballpit.jpg",
+      "question": "What is the location of this photo, Matt's favourite photo of Stephen?",
+      "answers": [
+        "Marineland",
+        "Chuck E Cheese",
+        "Ontario Place"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "Jessica/Scan7.jpg",
+      "question": "What did Jessica and her friend Catherine always get for each other whenever they travelled?",
+      "answers": [
+        "Postcards",
+        "Fridge magnets",
+        "Salt and pepper shakers"
+      ],
+      "correct": 1
+    },
+    {
+      "image": "Stephen/bday_shagz.jpg",
+      "question": "On what popular TV show did Stephen make an appearance?",
+      "answers": [
+        "Electric Circus",
+        "Degrassi",
+        "Canadian Idol"
+      ],
+      "correct": 1
+    },
+    {
+      "image": "both/IMG_3435.jpg",
+      "question": "Who sang in a choir called the \"Scott’s Singers\"",
+      "answers": [
+        "Jessica",
+        "Stephen"
+      ],
+      "correct": 1
     },
     {
       "image": "Stephen/img_6600.jpg",
@@ -60,318 +124,80 @@
       "answers": [
         "Photo scavanger hunt",
         "Ice bucket challenge",
-        "It's damn hot",
-        "Forgot to take a shower",
-        "Michelle dared him"
+        "Forgot to take a shower"
       ],
       "correct": 1
     },
     {
-      "image": "Stephen/midnight_madness.jpg",
-      "question": "Stephen loves going to shows, what one is this?",
+      "image": "both/JessicaStephen-Engagement-068.jpg",
+      "question": "At which TTC subway station would Jessica and Stephen meet up, as it would be half way from each other's homes?",
       "answers": [
-        "The Cat Empire at the Danforth",
-        "TIFF Midnight Madness at Ryerson",
-        "DJ Shagz at the Rivoli",
-        "Olafur Arnalds at Roy Thompson"
+        "High Park Station",
+        "Dundas West Station",
+        "Dufferin Station"
       ],
       "correct": 2
     },
     {
-      "image": "Stephen/starwars.jpg",
-      "question": "Who made this for school?",
+      "image": "Jessica/DSC07111.jpg",
+      "question": "What did Jessica do so that she could miss a day of school?",
       "answers": [
-        "Jessica",
-        "Stephen",
-        "Matt"
+        "Put a thermometer on alight bulb",
+        "Rub her face in poison ivy",
+        "Drank some sour milk"
       ],
       "correct": 2
     },
     {
-      "image": "Stephen/airport.jpg",
-      "question": "Where is Stephen going?",
+      "image": "Jessica/Jess_Cherry Knoll.jpg",
+      "question": "When Jessica was younger, what condiment did she like to put on her french fries?",
       "answers": [
-        "Cuba with his choir",
-        "Moosejaw to visit his brother",
-        "Varadero for a vacation",
-        "Thailand with his choir"
+        "BBQ sauce",
+        "Vinegar",
+        "Yellow Mustard"
       ],
       "correct": 1
     },
     {
-      "image": "Stephen/univox_carol.jpg",
-      "question": "Stephen loves to sing, what is the name of his choir?",
+      "image": "both/IMG_5395.jpg",
+      "question": "What musical instrument did both Jessica and Stephen play in highschool?",
       "answers": [
-        "Florivox Choir",
-        "Unity Choir",
-        "Univox Choir",
-        "Voxx Singers"
+        "Bass guitar",
+        "Trombone",
+        "Clarinet"
       ],
       "correct": 3
+    },
+    {
+      "image": "Jessica/Jess_Graphite.jpg",
+      "question": "What dish did her sisters Laura and Stephanie like Jessica (aged 7) to cook for them?",
+      "answers": [
+        "Chocolate eggs",
+        "Chocolate potatoes",
+        "Chocolate salad"
+      ],
+      "correct": 1
     },
     {
       "image": "Stephen/univox_men.jpg",
       "question": "What part does Stephen sing in the choir?",
       "answers": [
-        "Tenor 1",
-        "Tenor 2",
-        "Baritone",
-        "Bass"
+        "Tenor",
+        "Bass",
+        "Baritone"
       ],
       "correct": 3
-    },
-    {
-      "image": "Stephen/xmas_2016.jpg"
-    },
-    {
-      "image": "Jessica/DSC_0526.jpg",
-      "question": "How many flamingoes?",
-      "answers": [
-        "32",
-        "33",
-        "34",
-        "35",
-        "36"
-      ],
-      "correct": 4
-    },
-    {
-      "image": "Jessica/DSC_0604.jpg"
-    },
-    {
-      "image": "Jessica/DSC_0772.jpg"
-    },
-    {
-      "image": "Jessica/IMG_0673.jpg"
-    },
-    {
-      "image": "Jessica/IMG_0741.jpg"
-    },
-    {
-      "image": "Jessica/IMG_1009.jpg"
-    },
-    {
-      "image": "Jessica/IMG_2113.jpg"
-    },
-    {
-      "image": "Jessica/IMG_3915.jpg"
-    },
-    {
-      "image": "Jessica/IMG_3923.jpg"
-    },
-    {
-      "image": "Jessica/IMG_4841.jpg"
-    },
-    {
-      "image": "Jessica/IMG_8846.jpg"
-    },
-    {
-      "image": "Jessica/IMG_9920-2.jpg"
-    },
-    {
-      "image": "Jessica/Jess_Cherry Knoll.jpg",
-      "question": "What annual familycookout was this taken at?",
-      "answers": [
-        "Cherry Knoll",
-        "Apple Pine",
-        "Muskoka Lake",
-        "The Eagle's Nest"
-      ],
-      "correct": 1
-    },
-    {
-      "image": "Jessica/Jess_Colombia 2018.jpg"
-    },
-    {
-      "image": "Jessica/Jess_Graphite.jpg"
-    },
-    {
-      "image": "Jessica/Jess_Muskoka 2019.jpg"
-    },
-    {
-      "image": "Jessica/Jess_Ottawa 2016.jpg"
-    },
-    {
-      "image": "Jessica/Scan1.jpg"
-    },
-    {
-      "image": "Jessica/Scan2.jpg"
-    },
-    {
-      "image": "Jessica/Scan3.jpg"
-    },
-    {
-      "image": "Jessica/Scan4.jpg"
-    },
-    {
-      "image": "Jessica/Scan5.jpg"
-    },
-    {
-      "image": "Jessica/Scan6.jpg"
-    },
-    {
-      "image": "Jessica/Scan7.jpg"
     },
     {
       "image": "Jessica/Scan8.jpg",
-      "question": "In grade 12 where did Jessica cruise?",
-        "answers": [
-          "Alaska",
-          "Bahamas",
-          "Mediterranean",
-          "Iceland",
-          "Trinidad"
-        ],
-      "correct": 3
-    },
-    {
-      "image": "Jessica/Scan9.jpg"
-    },
-    {
-      "image": "Jessica/Scan10.jpg"
-    },
-    {
-      "image": "Jessica/Scan11.jpg"
-    },
-    {
-      "image": "both/aquarium.jpg"
-    },
-    {
-      "image": "both/birthday.jpg"
-    },
-    {
-      "image": "both/covid_cake.jpg"
-    },
-    {
-      "image": "both/cutting_cake.jpg"
-    },
-    {
-      "image": "both/home_church.jpg"
-    },
-    {
-      "image": "both/image3.jpg"
-    },
-    {
-      "image": "both/IMG_2299.jpg"
-    },
-    {
-      "image": "both/IMG_2610.jpg"
-    },
-    {
-      "image": "both/IMG_2705.jpg"
-    },
-    {
-      "image": "both/IMG_2740.jpg"
-    },
-    {
-      "image": "both/IMG_3390.jpg"
-    },
-    {
-      "image": "both/IMG_3435.jpg"
-    },
-    {
-      "image": "both/IMG_3592.jpg"
-    },
-    {
-      "image": "both/IMG_3873.jpg"
-    },
-    {
-      "image": "both/IMG_3934.jpg"
-    },
-    {
-      "image": "both/IMG_4146.jpg"
-    },
-    {
-      "image": "both/IMG_4149.jpg"
-    },
-    {
-      "image": "both/IMG_4745.jpg"
-    },
-    {
-      "image": "both/IMG_4758.jpg"
-    },
-    {
-      "image": "both/IMG_4976.jpg"
-    },
-    {
-      "image": "both/IMG_5024.jpg"
-    },
-    {
-      "image": "both/IMG_5108.jpg"
-    },
-    {
-      "image": "both/IMG_5146.jpg"
-    },
-    {
-      "image": "both/IMG_5300.jpg"
-    },
-    {
-      "image": "both/IMG_5395.jpg"
-    },
-    {
-      "image": "both/IMG_5786.jpg"
-    },
-    {
-      "image": "both/IMG_6120.jpg"
-    },
-    {
-      "image": "both/IMG_6203.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-004.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-005.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-006.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-008.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-016.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-050.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-052.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-058.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-068.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-069.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-092.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-093.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-095.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-097.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-118.jpg"
-    },
-    {
-      "image": "both/no_touching.jpg"
-    },
-    {
-      "image": "both/RSTD2092.jpg"
-    },
-    {
-      "image": "both/uhoh.jpg"
+      "question": "What happened to this cruise ship a month after Jessica's grade 12 class took a cruise to Greece and Turkey on it?",
+      "answers": [
+        "It was featured in a Saturday Night Live video called \"I'm on a Boat\"",
+        "It sank off the coast of Santorini",
+        "It was bought by Celine Dion"
+      ],
+      "correct": 2
+
     }
   ]
 }
-
-
