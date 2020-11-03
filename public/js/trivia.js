@@ -156,14 +156,6 @@ const updateGame = data => {
     }
 
   });
-
-  let answeredQuestions = slideContainer.querySelectorAll(".question.answered");
-  console.log("Answered questions:", answeredQuestions);
-
-  // if first question that was answered, show help tip to wipe for other images
-  if (answeredQuestions != null && answeredQuestions.length == 1) {
-    alert("Swipe left and right to move between questions");
-  }
 };
 
 const lazyLoad = embla => {
@@ -318,6 +310,7 @@ const playerNameExists = () => {
 playerDialog.addEventListener('close', () => {
   const nameInput = playerDialog.querySelector('#nameInput');
   setPlayerName(nameInput.value)
+  alert("Swipe left and right to move between questions");
 });
 
 // when page loaded
@@ -326,7 +319,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // set up player name
   if (!playerNameExists()) {
     playerDialog.showModal();
-
+      
   } else {
     let name = document.cookie
       .split('; ')

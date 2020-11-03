@@ -20,6 +20,8 @@ body {
   max-width: 75vw;
   max-height: 100vh;
   margin: auto;
+  width: 100%;
+  object-fit: contain;
 }
 
 form.question {
