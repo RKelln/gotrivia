@@ -20,6 +20,15 @@
       "correct": 3
     },
     {
+      "image": "Stephen/baby.jpg",
+      "question": "Who is the baby in this photo?",
+      "answers": [
+        "Jessica",
+        "Stephen"
+      ],
+      "correct": 2
+    },
+    {
       "image": "Stephen/wedding2.jpg",
       "question": "At whose wedding was this photo taken?",
       "answers": [
@@ -41,7 +50,7 @@
     },
     {
       "image": "Stephen/games_day_at_pits.jpg",
-      "question": "Every January 1st, Stphen makes pankcakes and plays board games at...?",
+      "question": "Every January 1st, Stephen makes pancakes and plays board games at...?",
       "answers": [
         "His brothers",
         "\"The Pits\"",
@@ -81,7 +90,7 @@
     },
     {
       "image": "Stephen/ballpit.jpg",
-      "question": "What is the location of this photo, Matt's favourite photo of Stephen?",
+      "question": "What is the location of this photo (Matt's favourite photo of Stephen)?",
       "answers": [
         "Marineland",
         "Chuck E Cheese",
@@ -132,7 +141,7 @@
       "image": "Stephen/img_6600.jpg",
       "question": "Why is Stephen pouring water on his head?",
       "answers": [
-        "Photo scavanger hunt",
+        "Photo scavenger hunt",
         "Ice bucket challenge",
         "Forgot to take a shower"
       ],
@@ -140,7 +149,7 @@
     },
     {
       "image": "both/JessicaStephen-Engagement-068.jpg",
-      "question": "At which TTC subway station would Jessica and Stephen meet up, as it would be half way from each other's homes?",
+      "question": "At which TTC station would Jessica and Stephen meet up, half way from each other's homes?",
       "answers": [
         "High Park Station",
         "Dundas West Station",
@@ -152,11 +161,21 @@
       "image": "Jessica/DSC07111.jpg",
       "question": "What did Jessica do so that she could miss a day of school?",
       "answers": [
-        "Put a thermometer on alight bulb",
+        "Put a thermometer on a light bulb",
         "Rub her face in poison ivy",
         "Drank some sour milk"
       ],
       "correct": 2
+    },
+    {
+      "image": "Stephen/demo_party.jpg",
+      "question": "Why is Stephen writing on the wall?",
+      "answers": [
+        "He lost a dare",
+        "He thought it was a washable marker",
+        "Celebrating the end of an era"
+      ],
+      "correct": 3
     },
     {
       "image": "Jessica/Jess_Cherry Knoll.jpg",
@@ -207,43 +226,129 @@
         "It was bought by Celine Dion"
       ],
       "correct": 2
-
+    },
+    {
+      "image": "Stephen/mounted_police.jpg",
+      "question": "What was Stephen's teenage summer job (typical of the local teens)?",
+      "answers": [
+        "Newspaper route",
+        "Tillsonburg Fair",
+        "Tobacco fields"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-006.jpg",
+      "question": "Who takes more sugar in their coffee?",
+      "answers": [
+        "Jessica",
+        "Stephen",
+        "Neither of them put sugar in their coffee"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "Stephen/wedding1.jpg",
+      "question": "When was the last time Stephen served as a Best Man at a wedding?",
+      "answers": [
+        "2010 - Matthew",
+        "2016 - Andrew",
+        "2019 - Graham"
+      ],
+      "correct": 1
+    },
+    {
+      "image": "Stephen/starwars.jpg",
+      "question": "Who made this school project?",
+      "answers": [
+        "Andrew",
+        "Jessica",
+        "Stephen"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "Stephen/univox_carol.jpg",
+      "question": "How many years combined have Stephen and Jessica sung in choirs?",
+      "answers": [
+        "12",
+        "18",
+        "24"
+      ],
+      "correct": 3
+    },
+    {
+      "image": "both/no_touching.jpg",
+      "question": "Where was Jessica and Stephen's first date?",
+      "answers": [
+        "Hale Coffee",
+        "High Park",
+        "The movies"
+      ],
+      "correct": 1
     },
     {
       "image": "both/JessicaStephen-Engagement-092.jpg"
     },
     {
-      "image": "both/JessicaStephen-Engagement-093.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-097.jpg"
+      "image": "Jessica/IMG_0741.jpg"
     },
     {
       "image": "both/IMG_6120.jpg"
     },
     {
-      "image": "both/no_touching.jpg"
+      "image": "Stephen/xmas_2016.jpg"
+    },
+    {
+      "image": "Jessica/DSC_0604.jpg"
     },
     {
       "image": "both/IMG_2610.jpg"
     },
     {
+      "image": "Stephen/airport.jpg"
+    },
+    {
       "image": "both/JessicaStephen-Engagement-016.jpg"
+    },
+    {
+      "image": "Jessica/camping.jpg"
     },
     {
       "image": "both/JessicaStephen-Engagement-058.jpg"
     },
     {
+      "image": "Jessica/Scan9.jpg"
+    },
+    {
       "image": "both/IMG_4745.jpg"
+    },
+    {
+      "image": "Jessica/IMG_3923.jpg"
     },
     {
       "image": "both/IMG_3592.jpg"
     },
     {
+      "image": "Jessica/IMG_0673.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-095.jpg"
+    },
+    {
+      "image": "Jessica/Scan1.jpg"
+    },
+    {
       "image": "both/covid_cake.jpg"
     },
     {
+      "image": "Stephen/midnight_madness.jpg"
+    },
+    {
       "image": "both/IMG_3934.jpg"
+    },
+    {
+      "image": "Jessica/Scan11.jpg"
     },
     {
       "image": "both/IMG_4758.jpg"
@@ -252,19 +357,28 @@
       "image": "both/JessicaStephen-Engagement-005.jpg"
     },
     {
-      "image": "both/IMG_5300.jpg"
+      "image": "Jessica/Jess_Colombia 2018.jpg"
     },
     {
-      "image": "both/JessicaStephen-Engagement-006.jpg"
+      "image": "both/IMG_5300.jpg"
     },
     {
       "image": "both/IMG_6203.jpg"
     },
     {
+      "image": "Jessica/IMG_2113.jpg"
+    },
+    {
       "image": "both/IMG_5786.jpg"
     },
     {
+      "image": "Stephen/halloween.jpg"
+    },
+    {
       "image": "both/JessicaStephen-Engagement-008.jpg"
+    },
+    {
+      "image": "Jessica/IMG_4841.jpg"
     },
     {
       "image": "both/uhoh.jpg"
@@ -273,7 +387,19 @@
       "image": "both/IMG_5146.jpg"
     },
     {
+      "image": "Jessica/DSC_0526.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-050.jpg"
+    },
+    {
+      "image": "Stephen/I_am_blinded.jpg"
+    },
+    {
       "image": "both/IMG_3390.jpg"
+    },
+    {
+      "image": "Jessica/Scan6.jpg"
     },
     {
       "image": "both/IMG_2705.jpg"
@@ -282,10 +408,7 @@
       "image": "both/JessicaStephen-Engagement-004.jpg"
     },
     {
-      "image": "both/JessicaStephen-Engagement-050.jpg"
-    },
-    {
-      "image": "both/JessicaStephen-Engagement-095.jpg"
+      "image": "Jessica/Scan3.jpg"
     },
     {
       "image": "both/IMG_4976.jpg"
@@ -294,10 +417,19 @@
       "image": "both/IMG_4149.jpg"
     },
     {
-      "image": "both/IMG_2740.jpg"
+      "image": "Jessica/IMG_3915.jpg"
     },
     {
       "image": "both/JessicaStephen-Engagement-052.jpg"
+    },
+    {
+      "image": "Stephen/lake.jpg"
+    },
+    {
+      "image": "both/IMG_2740.jpg"
+    },
+    {
+      "image": "Jessica/Scan2.jpg"
     },
     {
       "image": "both/JessicaStephen-Engagement-118.jpg"
@@ -306,13 +438,28 @@
       "image": "both/home_church.jpg"
     },
     {
+      "image": "Jessica/IMG_1009.jpg"
+    },
+    {
       "image": "both/birthday.jpg"
+    },
+    {
+      "image": "Stephen/stephen_loves_jessica.jpg"
     },
     {
       "image": "both/IMG_4146.jpg"
     },
     {
+      "image": "Jessica/Scan10.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-093.jpg"
+    },
+    {
       "image": "both/IMG_3873.jpg"
+    },
+    {
+      "image": "Jessica/IMG_8846.jpg"
     },
     {
       "image": "both/IMG_2299.jpg"
@@ -321,7 +468,16 @@
       "image": "both/image3.jpg"
     },
     {
+      "image": "Jessica/IMG_9920-2.jpg"
+    },
+    {
+      "image": "both/JessicaStephen-Engagement-097.jpg"
+    },
+    {
       "image": "both/IMG_5108.jpg"
+    },
+    {
+      "image": "Jessica/Scan5.jpg"
     },
     {
       "image": "both/cutting_cake.jpg"
@@ -330,7 +486,13 @@
       "image": "both/JessicaStephen-Engagement-069.jpg"
     },
     {
+      "image": "Jessica/Jess_Ottawa 2016.jpg"
+    },
+    {
       "image": "both/RSTD2092.jpg"
+    },
+    {
+      "image": "Jessica/Honduras_lizard.jpg"
     },
     {
       "image": "both/aquarium.jpg"
@@ -340,102 +502,6 @@
     },
     {
       "image": "Jessica/DSC_0772.jpg"
-    },
-    {
-      "image": "Jessica/IMG_0741.jpg"
-    },
-    {
-      "image": "Jessica/Scan9.jpg"
-    },
-    {
-      "image": "Jessica/DSC_0604.jpg"
-    },
-    {
-      "image": "Jessica/camping.jpg"
-    },
-    {
-      "image": "Jessica/IMG_3923.jpg"
-    },
-    {
-      "image": "Jessica/IMG_0673.jpg"
-    },
-    {
-      "image": "Jessica/Scan1.jpg"
-    },
-    {
-      "image": "Jessica/Scan11.jpg"
-    },
-    {
-      "image": "Jessica/Jess_Colombia 2018.jpg"
-    },
-    {
-      "image": "Jessica/IMG_2113.jpg"
-    },
-    {
-      "image": "Jessica/IMG_4841.jpg"
-    },
-    {
-      "image": "Jessica/DSC_0526.jpg"
-    },
-    {
-      "image": "Jessica/Scan6.jpg"
-    },
-    {
-      "image": "Jessica/Scan3.jpg"
-    },
-    {
-      "image": "Jessica/IMG_3915.jpg"
-    },
-    {
-      "image": "Jessica/Scan2.jpg"
-    },
-    {
-      "image": "Jessica/IMG_1009.jpg"
-    },
-    {
-      "image": "Jessica/Scan10.jpg"
-    },
-    {
-    "image": "Jessica/IMG_8846.jpg"
-    },
-    {
-    "image": "Jessica/IMG_9920-2.jpg"
-    },
-    {
-    "image": "Jessica/Scan5.jpg"
-    },
-    {
-    "image": "Jessica/Jess_Ottawa 2016.jpg"
-    },
-    {
-      "image": "Stephen/xmas_2016.jpg"
-    },
-    {
-      "image": "Stephen/airport.jpg"
-    },
-    {
-      "image": "Stephen/midnight_madness.jpg"
-    },
-    {
-      "image": "Stephen/univox_carol.jpg"
-    },
-    {
-      "image": "Stephen/starwars.jpg"
-    },
-    {
-      "image": "Stephen/halloween.jpg"
-    },
-    {
-      "image": "Stephen/demo_party.jpg"
-    },
-    {
-      "image": "Stephen/I_am_blinded.jpg"
-    },
-    {
-      "image": "Stephen/wedding1.jpg"
-    },
-    {
-      "image": "Stephen/lake.jpg"
     }
   ]
 }
