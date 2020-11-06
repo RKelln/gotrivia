@@ -1,32 +1,6 @@
-/*
-fetch('slides')
-  .then(response => {
-    if (response.ok) {
-      return Promise.resolve(response);
-    }
-    else {
-      return response.text().then(text => {
-        throw new Error(text);
-      });
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    initSlides(data);
-  })
-  .catch(error => {
-    console.error(error);
-    alert(error);
-  });
-*/
-
-
 const wrap = document.querySelector(".embla");
 const viewPort = wrap.querySelector(".embla__viewport");
 const slideContainer = viewPort.querySelector(".embla__container");
-var embla = null;
-
 
 const createSlidesFromJSON = (jsonData, container) => {
   let html = '';
@@ -81,6 +55,54 @@ const createSlidesFromJSON = (jsonData, container) => {
   container.innerHTML = html;
 };
 
+const fetchSlides = () => {
+  return fetch('slides')
+    .then(response => {
+      if (response.ok) {
+        return Promise.resolve(response);
+      }
+      else {
+        return response.text().then(text => {
+          throw new Error(text);
+        });
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    })
+    .catch(error => {
+      console.error(error);
+      alert(error);
+    });
+};
+
+const autoplay = (embla, interval) => {
+  let timer = 0;
+
+  const play = () => {
+    stop();
+    requestAnimationFrame(() => (timer = window.setTimeout(next, interval)));
+  };
+
+  const stop = () => {
+    window.clearTimeout(timer);
+    timer = 0;
+  };
+
+  const next = () => {
+    if (embla.canScrollNext()) {
+      embla.scrollNext();
+    } else {
+      embla.scrollTo(0);
+    }
+    play();
+  };
+
+  return { play, stop };
+};
+
+
 const lazyLoad = embla => {
   const slides = embla.slideNodes();
   const images = slides.map(slide => slide.querySelector(".embla__slide__img"));
@@ -124,9 +146,13 @@ const lazyLoad = embla => {
   };
 };
 
-const initSlides = data => {
+const initSlides = (data, options) => {
   createSlidesFromJSON(data, slideContainer);
-  embla = EmblaCarousel(viewPort, {loop: true});
+
+  if (typeof options !== 'undefined') {
+    options = {loop: true};
+  }
+  const embla = EmblaCarousel(viewPort, options);
   const loadImagesInView = lazyLoad(embla);
   const loadImagesInViewAndDestroyIfDone = eventName => {
     const loadedAll = loadImagesInView();
@@ -148,5 +174,7 @@ const initSlides = data => {
         break;
     }
   });
+
+  return embla;
 };
 

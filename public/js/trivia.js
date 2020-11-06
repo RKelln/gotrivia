@@ -58,7 +58,7 @@ const createTriviaFromJSON = (jsonData, container) => {
   );
 };
 
-const initTrivia = data => {
+const initTrivia = (data, embla) => {
 
   createTriviaFromJSON(data, slideContainer);
 
@@ -154,8 +154,8 @@ const setPlayerName = name => {
     .then(response => response.json())
     .then(data => {
       //console.log(data);
-      initSlides(data);
-      initTrivia(data);
+      const embla = initSlides(data);
+      initTrivia(data, embla);
     })
     .catch(error => {
       console.error(error);

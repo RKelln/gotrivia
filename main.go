@@ -118,7 +118,7 @@ func main() {
 	})
 
 	router.GET("/slides", func(c *gin.Context) {
-		c.JSON(http.StatusOK, game_data.Slides)
+		c.JSON(http.StatusOK, game_data)
 	})
 
 	router.GET("/game/:playerName", func(c *gin.Context) {
@@ -135,6 +135,7 @@ func main() {
 
 	router.Static("/public", "./public")
 	router.StaticFile("/", "index.html")
+	router.StaticFile("/slideshow", "slideshow.html")
 
 	//router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
