@@ -40,7 +40,15 @@ func localIP() string {
 			return address
 		}
 	}
-	return "unknown"
+	possible_addresses := "No 192.168.X.X found, try one of:\n"
+	for _, addr := range addrs {
+		fmt.Println(addr.String())
+		address := strings.Split(addr.String(), "/")[0]
+		if len(Port) > 0 {
+			possible_addresses += fmt.Sprintf("%v:%v\n", address, Port)
+		}
+	}
+	return possible_addresses
 }
 
 func myGame(c *gin.Context, playerName string) {
@@ -111,12 +119,6 @@ func main() {
 	// 	c.Header("Cache-Control", "max-age=5")
 	// })
 
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
 	router.GET("/slides", func(c *gin.Context) {
 		c.JSON(http.StatusOK, game_data)
 	})
@@ -133,9 +135,19 @@ func main() {
 
 	router.POST("/answer/:slide", postAnswer)
 
+	router.GET("/status", func(c *gin.Context) {
+		status, err := game_data.Status()
+		if err != nil {
+			c.JSON(http.StatusBadRequest, err)
+			return
+		}
+		c.JSON(http.StatusOK, status)
+	})
+
 	router.Static("/public", "./public")
-	router.StaticFile("/", "index.html")
-	router.StaticFile("/slideshow", "slideshow.html")
+	router.StaticFile("/", "public/index.html")
+	router.StaticFile("/slideshow", "public/slideshow.html")
+	router.StaticFile("/stats", "public/stats.html")
 
 	//router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 

@@ -3,12 +3,13 @@ const viewPort = wrap.querySelector(".embla__viewport");
 const slideContainer = viewPort.querySelector(".embla__container");
 
 const createSlidesFromJSON = (jsonData, container) => {
-  let html = '';
-
+  
   if (!jsonData.hasOwnProperty('slides') || jsonData.slides == null) {
     console.log("No slide data in js");
     return;
   }
+
+  let html = '';
 
   jsonData.slides.forEach((slide, s) => {
     let question_num = s + 1;
@@ -52,6 +53,42 @@ const createSlidesFromJSON = (jsonData, container) => {
     </div>
     `;
   });
+  container.innerHTML = html;
+};
+
+const createLeaderboardFromJSON = (data, container) => {
+  
+  if (!data.hasOwnProperty('leaderboard') || data.leaderboard == null) {
+    console.log("No loaderboard data");
+    return;
+  }
+
+  let html = `
+    <table>
+      <thead>
+        <tr>
+          <td>Player</td>
+          <td>Score</td>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  
+  data.leaderboard.forEach((player, i) => {
+    let row_class = '';
+    if (typeof playerName === 'string') {
+      if (playerName == player.name) {
+        row_class = 'active_player';
+      }
+    }
+    html += `
+        <tr class="${row_class}">
+          <td class="name">${player.name}</td>
+          <td>${player.points}</td>
+        </tr>`;
+  });
+  html += `</tbody></table>`;
+
   container.innerHTML = html;
 };
 

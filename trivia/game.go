@@ -29,6 +29,14 @@ type MyGame struct {
 	Rankings  []Ranking `json:"leaderboard"` // player rankings
 }
 
+type GameStatus struct {
+	SlideList
+	Players   []Player  `json:"players"`
+	Completed []int     `json:"completed"`   // number of players who have completed answers
+	Correct   []int     `json:"correct"`     // number of players who got the correct answer
+	Rankings  []Ranking `json:"leaderboard"` // player rankings
+}
+
 type Ranking struct {
 	Name   string `json:"name"`
 	Points int    `json:"points"`
@@ -113,6 +121,18 @@ func (g *Game) ForPlayer(name string) (*MyGame, error) {
 	return myGame, err
 }
 
+func (g *Game) Status() (*GameStatus, error) {
+	var err error
+	status := &GameStatus{}
+	status.Players = g.Players
+	status.Slides = g.Slides
+
+	// other player results
+	status.Correct, status.Completed, status.Rankings = g.Results()
+
+	return status, err
+}
+
 func (p *Player) Results(correct []int) ([]int, error) {
 	results := make([]int, len(correct))
 	if len(correct) != len(p.Answers) {
@@ -157,8 +177,9 @@ func (g *Game) Results() ([]int, []int, []Ranking) {
 		rankings = append(rankings, Ranking{Name: g.Players[i].Name, Points: sum_correct})
 	}
 
+	// highest to lowest rankings
 	sort.SliceStable(rankings, func(i, j int) bool {
-		return rankings[i].Points < rankings[j].Points
+		return rankings[i].Points > rankings[j].Points
 	})
 
 	return all_correct, all_answered, rankings

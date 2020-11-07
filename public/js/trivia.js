@@ -58,6 +58,7 @@ const createTriviaFromJSON = (jsonData, container) => {
   );
 };
 
+
 const initTrivia = (data, embla) => {
 
   createTriviaFromJSON(data, slideContainer);
@@ -77,6 +78,8 @@ const initTrivia = (data, embla) => {
 };
 
 const updateGame = data => {
+
+  createLeaderboardFromJSON(data, document.getElementById("leaderboard"));
 
   if (!data.hasOwnProperty('slides') || data.slides == null) {
     console.log("updateGame: No slide data");
@@ -120,15 +123,20 @@ const updateGame = data => {
     }
 
   });
+
 };
 
+// leaderbaord
+const leaderboardDialog = document.getElementById("leaderboard");
 
 // player name dialog
 var playerName = "unknown player";
 const playerDialog = document.getElementById("playerDialog");
 const confirmBtn = playerDialog.querySelector('#nameConfirmBtn');
 
-dialogPolyfill.registerDialog(playerDialog); // Now dialog always acts like a native <dialog>.
+// Now dialog always acts like a native <dialog>.
+dialogPolyfill.registerDialog(playerDialog); 
+dialogPolyfill.registerDialog(leaderboardDialog); 
 
 
 const setPlayerName = name => {
@@ -188,4 +196,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
       .split('=')[1];
     setPlayerName(name);
   }
+
+  // set up leaderbaord
+  document.getElementById("show_leaderboard").addEventListener('click', event => {
+    if (leaderboardDialog.open) {
+      leaderboardDialog.close();
+    } else {
+      leaderboardDialog.showModal();
+    }
+  });
+  document.getElementById("leaderboard").addEventListener('click', event => {
+    leaderboardDialog.close();
+  });
 });

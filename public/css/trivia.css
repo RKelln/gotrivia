@@ -30,29 +30,6 @@ form.question {
   width: auto;
 }
 
-@media only screen and (orientation: landscape) {
-  .embla__slide__inner {
-    flex-direction: row;
-  }
-  form.question {
-    min-width: 20vw;
-  }
-}
-
-@media only screen and (orientation: portrait) {
-  .embla__slide__inner {
-    flex-direction: column;
-  }
-  form.question {
-    min-width: 80vw;
-  }
-  .embla__slide__img {
-    max-height: 80vh; /* left enough room to show question */
-  }
-  .question ol {
-    padding-left: 3.25em;
-  }
-}
 
 form {
   width: auto;
@@ -192,6 +169,51 @@ fieldset ol {
   text-indent: 0em;
 }
 
+/* tables and leaderboard */
+
+table {
+  border: 1px solid grey;
+}
+thead tr {
+  background-color: #066451;
+  text-align: left;
+}
+td {
+  padding: 0.5em 0.6em;
+  text-align: center;
+}
+
+#leaderboard {
+  background: #1c1c1c;
+  color: #fbfbfb;
+  max-height: 80vh;
+  max-width: 80vw;
+  overflow: auto;
+}
+
+#leaderboard .name {
+  text-align: right
+}
+
+#leaderboard tr.active_player {
+  background: #3c3c3c;
+}
+
+#show_leaderboard {
+  display: block;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  color: #fbfbfb;
+  cursor: pointer;
+  z-index: 1;
+  opacity: 0.66;
+  font-size: 200%;
+}
+
+#show_leaderboard:hover {
+  opacity: 1;
+}
 
 /* https://github.com/GoogleChrome/dialog-polyfill/blob/master/dist/dialog-polyfill.css */
 dialog {
@@ -230,4 +252,34 @@ dialog.fixed {
   position: fixed;
   top: 50%;
   transform: translate(0, -50%);
+}
+
+
+
+@media only screen and (orientation: landscape) {
+  .embla__slide__inner {
+    flex-direction: row;
+  }
+  form.question {
+    min-width: 20vw;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .embla__slide__inner {
+    flex-direction: column;
+  }
+  form.question {
+    min-width: 80vw;
+  }
+  .embla__slide__img {
+    max-height: 80vh; /* left enough room to show question */
+  }
+  .question ol {
+    padding-left: 3.25em;
+  }
+  #show_leaderboard {
+    font-size: 150%;
+  }
+
 }

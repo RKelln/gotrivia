@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bauman & Scholtz Trivia!</title>
+
+  <link href="public/css/reset.css" rel="stylesheet">
+  <link href="public/css/embla.css" rel="stylesheet">
+  <link href="public/css/trivia.css" rel="stylesheet">
+
+  <style>
+    td.question, td.answer {
+      text-align: left;
+    }
+  </style>
+
+</head>
+<body>
+
+    <!-- Embla -->
+  <div class="embla">
+    <div class="embla__viewport">
+      <div class="embla__container">
+        <!-- created by javascrript -->
+      </div>
+    </div>
+  </div>
+
+  <div id="stats">
+    <h2># of Players: <span id="num_players"></span></h2>
+    
+    <div id="leaderboard">
+    </div>
+
+    <table id="questions">
+      <thead>
+        <tr>
+          <td>#</td>
+          <td>Answered</td>
+          <td>Correct</td>
+          <td>Question</td>
+          <td>Answer</td>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- filled by javascript -->
+      </tbody>
+    </table>
+
+  </div>
+
+  <script src="public/js/slides.js"></script>
+
+  <script>
+
+    const createQuestionsTable = (data, table) => {
+
+      if (!data.hasOwnProperty('completed') || data.completed == null || 
+          !data.hasOwnProperty('correct') || data.correct == null ||
+          !data.hasOwnProperty('players') || data.players == null ||
+          !data.hasOwnProperty('slides') || data.slides == null) {
+        console.log("No question data");
+        return;
+      }
+      if (data.completed.length != data.correct.length) {
+        console.log("Invalid question data");
+        return;
+      }
+      let player_count = data.players.length;
+
+      const tbody = table.querySelector("tbody");
+      data.slides.forEach((slide, i) => {
+        let question_num = i + 1;
+
+        if (slide.hasOwnProperty('question') && slide.hasOwnProperty('answers')) {
+
+          let correct_percent = 0;
+          if (data.completed[i] > 0) {
+            correct_percent = Math.round((parseFloat(data.correct[i]) / parseFloat(data.completed[i]) * 100.0), 0);
+          }
+          let answered_percent = Math.round((parseFloat(data.completed[i]) / parseFloat(player_count) * 100.0), 0);
+
+          tbody.insertAdjacentHTML('beforeend', 
+            `<tr>
+              <td>${question_num}</td>
+              <td>${answered_percent}%</td>
+              <td>${correct_percent}%</td>
+              <td class="question">${slide.question}</td>
+              <td class="answer">${slide.answers[slide.correct - 1]}</td>
+            </tr>`
+          );
+        }
+      });
+    };
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+
+      const leaderboard = document.querySelector("#leaderboard");
+
+      fetch('status')
+      .then(response => {
+        if (response.ok) {
+          return Promise.resolve(response);
+        }
+        else {
+          return response.text().then(text => {
+            throw new Error(text);
+          });
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        createQuestionsTable(data, document.querySelector("#questions"));
+        createLeaderboardFromJSON(data, leaderboard);
+        document.querySelector("#num_players").innerHTML = data.players.length;
+      })
+      .catch(error => {
+        console.error(error);
+        alert(error);
+      });
+    });
+  </script>
+</body>
+</html>
