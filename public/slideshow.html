@@ -11,8 +11,43 @@
   <link href="public/css/trivia.css" rel="stylesheet">
 
   <style>
+    body {
+      overflow: hidden;
+    } 
+
     .embla {
       padding: 0;
+    }
+
+    .embla__container {
+      transform: none !important;
+      width: 100%;
+      padding-bottom: 100%;
+      cursor:none;
+    }
+
+    .embla__slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 2s;
+    }
+
+    .embla__slide.is-selected {
+      opacity: 1;
+      z-index: 1;
+      transition: opacity 2s;
+    }
+
+    .embla__slide__img {
+      opacity: 1;
+    }
+
+    .embla__slide.has-loaded .embla__slide__img {
+      opacity: 1;
     }
 
     .embla__slide__img {
@@ -29,32 +64,44 @@
     }
 
     #trivia-instructions {
+      position: absolute;
+      top: 25vh;
       width: 100%;
-      height: 100%;
+      z-index: 2;
       margin: auto;
       text-align: center;
+      font-size: 300%;
+      color: #fff;
+      background: #1c1c1c8e;
+      text-shadow: 0px 0px 2px black;
+      padding: 5%;
+      backdrop-filter: blur(6px);
     }
 
     #trivia-instructions h1 {
-      font-size: 500%;
       font-weight: bold;
-      margin-top: 30vh;
+      font-size: 125%;
       margin-bottom: 1em;
     }
 
     #trivia-instructions h2 {
-      font-size: 400%;
-      font-weight: regular;
+      font-weight: normal;
       margin-bottom: 1em;
     }
 
     #trivia-instructions h3 {
-      font-size: 500%;
+      font-size: 125%;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
+
+  <div id="trivia-instructions">
+    <h1>Join Us For Trivia!</h1>
+    <h2>Go to this address on your phone browser :</h2>
+    <h3>ENTER ADDRESS</h3>
+  </div>
 
   <!-- Embla -->
   <div class="embla">
@@ -72,19 +119,31 @@
     document.addEventListener('DOMContentLoaded', (event) => {
       fetchSlides().then(data => {
         const embla = initSlides(data);
-        // add trivia info slide
-        slideContainer.insertAdjacentHTML('afterbegin', 
-          ` <div class="embla__slide">
-              <div id="trivia-instructions">
-                <h1>Join Us For Trivia!</h1>
-                <h2>Go to this address on your phone browser :</h2>
-                <h3>192.168.1.1:8080</h3>
-              </div>
-            </div>`);
-
         let {play, stop} = autoplay(embla, 7000);
         play();
       });
+    });
+
+    const instructions = document.getElementById("trivia-instructions");
+
+    instructions.addEventListener("click", event => {
+      instructions.style.display = "none";
+    })
+
+     // listen to keys
+    document.addEventListener('keyup', (e) => {
+      e.preventDefault();
+      console.log(e.code);
+      switch (e.code) {
+        case 'Space':
+        case 'KeyI':
+          if (instructions.style.display === "none") {
+            instructions.style.display = "block";
+          } else {
+            instructions.style.display = "none";
+          }
+          break;
+      }
     });
   </script>
 </body>
