@@ -43,10 +43,9 @@ fieldset {
 }
 
 
-
 button {
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   background: linear-gradient(to bottom, #3b90b7 0%,#23698e 100%); /* W3C */
   border: none;
   border-radius: 5px;
@@ -107,7 +106,7 @@ button:after {
   display: none;
 }
 
-.answered.correct .selected {
+.answered.correct .selected, .answered.correct .number {
   background: green;
 }
 .answered.correct .selected:before {
@@ -115,7 +114,7 @@ button:after {
   color: #fbfbfb;
 }
 
-.answered.incorrect .selected {
+.answered.incorrect .selected, .answered.incorrect .number {
   background: #a60000;
 }
 .answered.incorrect .selected:before {
@@ -132,6 +131,13 @@ button:after {
   color: #fbfbfb;
 }
 */
+
+.answered p {
+  width: 100%;
+  max-width: 30em;
+  text-align: center;
+  opacity: 0.8;
+}
 
 .question .results {
   display: none;
@@ -197,6 +203,11 @@ td {
 
 #leaderboard tr.active_player {
   background: #3c3c3c;
+}
+
+#leaderboard table {
+  width: 100%;
+  min-width: 20vw;
 }
 
 #show_leaderboard {
@@ -275,11 +286,17 @@ dialog.fixed {
   .embla__slide__img {
     max-height: 80vh; /* left enough room to show question */
   }
-  .question ol {
+  .question ol, .question p {
     padding-left: 3.25em;
   }
   #show_leaderboard {
     font-size: 150%;
   }
 
+}
+
+@media only screen and (max-device-width: 480px) {
+  .question ol, .question p {
+    padding-left: 0;
+  }
 }
