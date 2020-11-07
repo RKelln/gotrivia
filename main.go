@@ -111,6 +111,7 @@ func main() {
 	}
 	trivia.NewGame(game_data, slide_data)
 
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	router.Use(favicon.New("./public/favicon.ico"))
 
