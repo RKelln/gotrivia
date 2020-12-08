@@ -1,7 +1,7 @@
 Gotrivia: Go Wedding Trivia Server
 ==================================
 
-This very simple server allows you to run your own slideshow and trivia at your wedding. It is designed for tech savvy users, if you can understand how to run this after reading the this readme, then this is for you.
+This very simple server allows you to run your own slideshow and trivia at your wedding. It is designed for tech savvy users, if you can understand how to run this after reading this readme, then this is for you. (In general you only really need to be able to edit a JSON file to use this).
 
 This was made for a friend's wedding during the pandemic. Because all the guests were seated at their own table there couldn't be much interaction while seated for dinner. This trivia app gave people something to do before and between courses. It is important to note that the guests answer the trivia questions independently of each other, unlike other trivia apps where all the players answer the same question at the same time.
 
@@ -36,11 +36,9 @@ Installation
 
 If you have created a `trivia.zip` file for others, they can just unzip that.
 
-If you are developing your own trivia see Development below.
+Otherwise you want to download all the files to a directory (or otherwise get all the files from github), then place your images into a folder in `public\images\`. Edit 'slides.json' to refer to your images.
 
-Place your images into a folder in `public\images\`.
-
-Edit 'slides.json' to refer to your images.
+If you are developing your own trivia see [Development](#Development) below.
 
 
 Getting Started
