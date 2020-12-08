@@ -3,7 +3,7 @@ Gotrivia: Go Wedding Trivia Server
 
 This very simple server allows you to run your own slideshow and trivia at your wedding. It is designed for tech savvy users, if you can understand how to run this after reading the this readme, then this is for you.
 
-This was made for a friend's wedding during the pandemic - because all the guests were seated at their own table there couldn't be much interaction while seated for dinner. This trivia app gave people something to do. It is important to note that the guests answer the trivia independent of each other, unlike other trivia apps that have all the players answer the same question at the same time.
+This was made for a friend's wedding during the pandemic. Because all the guests were seated at their own table there couldn't be much interaction while seated for dinner. This trivia app gave people something to do before and between courses. It is important to note that the guests answer the trivia questions independently of each other, unlike other trivia apps where all the players answer the same question at the same time.
 
 This first version is very simplistic but got the job done. It is built with [gin](https://github.com/gin-gonic/gin) and [Embla Carousel](https://davidcetinkaya.github.io/embla-carousel/) and configured through JSON. It has the following features:
 
@@ -34,7 +34,9 @@ This was the first time I used gin (and a long time since I used Go) and this wa
 Installation
 ============
 
-Unzip into a directory. 
+If you have created a `trivia.zip` file for others, they can just unzip that.
+
+If you are developing your own trivia see Development below.
 
 Place your images into a folder in `public\images\`.
 
@@ -59,7 +61,7 @@ If that doesn't work try:
 
 If you are running from the command line the server will output it's local address too that you can use to connect from your phone, etc. For example:
 
-    $ cd trivia
+    $ cd gotrivia
     $ ./trivia-server.linux 
 
     ******************************************
