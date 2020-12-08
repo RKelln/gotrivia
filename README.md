@@ -161,11 +161,11 @@ Connect to projector to laptop. Open terminal and run the trivia server executab
 
 While viewing the slideshow press the `i` key to toggle the display of the connection information. I left this up for 15 minutes or so while guests were entering the space and again when the MC was introducing the trivia game.
 
-We used the local network at the venue so that images would download faster and no one would need to use mobile data. We distributed slips of paper to each table using the [Connection Information PDF](wedding_trivia_network.pdf). 
+We used the local network at the venue so that images would download faster and no one would need to use mobile data. We distributed slips of paper to each table using the [Connection Information PDF](wedding_trivia_network_slips.pdf). 
 
 Edit `slideshow.html` to add the connection information, and change the title for example:
 ```html
-    <title>Name & Name Trivia!</title>
+<title>Name & Name Trivia!</title>
 ...
   <div id="trivia-instructions">
     <h1>Join Us For Trivia!</h1>
@@ -177,7 +177,7 @@ Edit `slideshow.html` to add the connection information, and change the title fo
 
 Edit `index.html` to change the title:
 ```html
-    <title>Name & Name Trivia!</title>
+<title>Name & Name Trivia!</title>
 ```
 
 You (and the MC) can check on how the guests are doing at the url `/stats`. This displays the leaderboard and number of people who have answered each question, the number of people who got the question correct and the answer for the question (so the MC can announce the correct answer). Please note that nothing prevents players from going to this page so keep that url secret.
@@ -212,19 +212,28 @@ FAQ
 ===
 
 _Q. Does this work on my platform?_
+
 A. Probably? Out of the box it will run on Windows, OS X, and Linux. Go runs on most things, you need to build it for that platform. Something like:
 ```bash
 env GOOS=CHANGEME GOARCH=CHANGEME go build -o build/trivia-server-for-your-platform gotrivia
 ```
 
+
 _Q. Can I run this over the internet / not on a local network?_
+
 A. I haven't tried, and can't help you, but shouldn't be too hard to set it up if you know your stuff.
 
+
 _Q. Can you help me run / install / use this?_
+
 A. Nope. This is provided as is. I'm sorry that I don't have time to help more.
 
+
 _Q. I found a bug, what do I do?_
+
 A. Submit an issue. It isn't likely that I fix it, sorry, just a lack of time. If you have a fix, it is much more likely that I integrate it.
 
+
 _Q. I want it to do X._
+
 A. Make a fork and a pull request. Thanks for contributing.
