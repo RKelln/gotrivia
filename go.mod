@@ -1,4 +1,4 @@
-module go-trivia
+module gotrivia
 
 go 1.15
 

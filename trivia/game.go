@@ -10,38 +10,40 @@ import (
 	jsoniter "github.com/json-iterator/go"
 )
 
+// Game represents the active trivia game.
+// Only one game can be active at a time
 type Game struct {
 	Players []Player `json:"players"`
 	SlideList
 }
 
-type Player struct {
-	Name    string `json:"name"`
-	Answers []int  `json:"answers,omitempty"` // player's answers (which answer they answered, 0 = no answer)
-}
-
+// MyGame represents the data sent back to Players, customized to that player.
 type MyGame struct {
 	SlideList
 	Answers   []int     `json:"answers"`     // player's answers (which answer they answered, 0 = no answer)
 	Results   []int     `json:"results"`     // player's answers results (correct = 1, incorrect = -1, n/a = 0)
 	Completed []int     `json:"completed"`   // number of players who have completed answers
 	Correct   []int     `json:"correct"`     // number of players who got the correct answer
-	Rankings  []Ranking `json:"leaderboard"` // player rankings
+	Rankings  []Ranking `json:"leaderboard"` // all player rankings
 }
 
+// GameStatus is used for general game information for all players.
+// Used for administration and overview of the game status.
 type GameStatus struct {
 	SlideList
 	Players   []Player  `json:"players"`
 	Completed []int     `json:"completed"`   // number of players who have completed answers
 	Correct   []int     `json:"correct"`     // number of players who got the correct answer
-	Rankings  []Ranking `json:"leaderboard"` // player rankings
+	Rankings  []Ranking `json:"leaderboard"` // all player rankings
 }
 
+// Ranking represents an row on the leaderboard
 type Ranking struct {
 	Name   string `json:"name"`
 	Points int    `json:"points"`
 }
 
+// Add player to the game
 func (g *Game) AddPlayer(p Player) error {
 	if _, found := g.FindPlayer(p.Name); found {
 		return fmt.Errorf("Player %v already exists in game", p.Name)
@@ -57,6 +59,7 @@ func (g *Game) AddPlayer(p Player) error {
 	return nil
 }
 
+// FindPlayer returns player index and true, or -1 and false if not found.
 func (g *Game) FindPlayer(name string) (int, bool) {
 	for i, p := range g.Players {
 		if p.Name == name {
@@ -66,6 +69,8 @@ func (g *Game) FindPlayer(name string) (int, bool) {
 	return -1, false
 }
 
+// AddAnswer returns nil if successful or an error.
+// This is used to add/set the answer to a question for the named player.
 func (g *Game) AddAnswer(name string, slide int, answer int) error {
 	i, found := g.FindPlayer(name)
 	if !found {
@@ -85,6 +90,8 @@ func (g *Game) AddAnswer(name string, slide int, answer int) error {
 	return nil
 }
 
+// ForPlayer returns a MyGame struct and error if it fail.
+// This is used to get the game information for a particular player.
 func (g *Game) ForPlayer(name string) (*MyGame, error) {
 	var err error
 	myGame := &MyGame{}
@@ -121,8 +128,9 @@ func (g *Game) ForPlayer(name string) (*MyGame, error) {
 	return myGame, err
 }
 
-func (g *Game) Status() (*GameStatus, error) {
-	var err error
+// Status returns a GameStatus struct and error on failure.
+// This is used to get the overall game status/information for all players.
+func (g *Game) Status() *GameStatus {
 	status := &GameStatus{}
 	status.Players = g.Players
 	status.Slides = g.Slides
@@ -130,29 +138,12 @@ func (g *Game) Status() (*GameStatus, error) {
 	// other player results
 	status.Correct, status.Completed, status.Rankings = g.Results()
 
-	return status, err
+	return status
 }
 
-func (p *Player) Results(correct []int) ([]int, error) {
-	results := make([]int, len(correct))
-	if len(correct) != len(p.Answers) {
-		return results, fmt.Errorf("Player %v answers to not match answer key", p.Name)
-	}
-
-	for i := range correct {
-		// if player has an answer and there is a correct answer
-		if p.Answers[i] > 0 && correct[i] > 0 {
-			if correct[i] == p.Answers[i] {
-				results[i] = 1
-			} else {
-				results[i] = -1
-			}
-		}
-	}
-
-	return results, nil
-}
-
+// Results returns the statistics for:
+// the correct answers, all answered questions, and the player rankings
+// Player rankings are sorted from highest to lowest score, and do not handle ties in any particular way
 func (g *Game) Results() ([]int, []int, []Ranking) {
 	answers := g.AnswerKey()
 	all_correct := make([]int, len(answers))
@@ -185,6 +176,7 @@ func (g *Game) Results() ([]int, []int, []Ranking) {
 	return all_correct, all_answered, rankings
 }
 
+// Save saves the game state to a json file
 func (g *Game) Save(filepath string) error {
 	fmt.Println("Saving game:", filepath)
 
@@ -201,6 +193,7 @@ func (g *Game) Save(filepath string) error {
 	return nil
 }
 
+// GetGameJSON creates a game from a json file
 func GetGameJSON(filepath string) (*Game, error) {
 	game := &Game{}
 
@@ -227,7 +220,9 @@ func GetGameJSON(filepath string) (*Game, error) {
 	return game, nil
 }
 
-// adds slides to game
+// NewGame initializes a Game from a SlideList
+// If the existing slides in the Game do not match the slides in the SlideList
+// then reset slides and players.
 func NewGame(g *Game, s *SlideList) error {
 
 	if len(g.Slides) == 0 {
@@ -239,7 +234,6 @@ func NewGame(g *Game, s *SlideList) error {
 		g.Players = nil // clear existing players
 	}
 
-	// remove all players?
 	if len(g.Players) > 0 {
 		fmt.Print("Existing players: ")
 		names := []string{}

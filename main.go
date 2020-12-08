@@ -13,7 +13,7 @@ import (
 	"syscall"
 	"time"
 
-	"go-trivia/trivia"
+	"gotrivia/trivia"
 
 	"github.com/gin-gonic/gin"
 	"github.com/thinkerou/favicon"
@@ -26,6 +26,8 @@ const slides_path = "./slides.json"
 const game_path = "./game.json"
 const Port = "8080"
 
+// localIP is a helper that returns a string representing the local IP or possible local addresses.
+// If no 192.168.N.N address is found then it lists all possible local addresses.
 func localIP() string {
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
@@ -51,6 +53,7 @@ func localIP() string {
 	return possible_addresses
 }
 
+// myGame is a wrapper to get the game info for a particular player
 func myGame(c *gin.Context, playerName string) {
 	data, err := game_data.ForPlayer(playerName)
 	if err != nil {
@@ -60,6 +63,7 @@ func myGame(c *gin.Context, playerName string) {
 	c.JSON(http.StatusOK, data)
 }
 
+// postAnswer is a handler to set a player's answer for a trivia question
 func postAnswer(c *gin.Context) {
 	player := c.PostForm("player")
 	slide, err := strconv.Atoi(c.Param("slide"))
@@ -137,20 +141,13 @@ func main() {
 	router.POST("/answer/:slide", postAnswer)
 
 	router.GET("/status", func(c *gin.Context) {
-		status, err := game_data.Status()
-		if err != nil {
-			c.JSON(http.StatusBadRequest, err)
-			return
-		}
-		c.JSON(http.StatusOK, status)
+		c.JSON(http.StatusOK, game_data.Status())
 	})
 
 	router.Static("/public", "./public")
 	router.StaticFile("/", "public/index.html")
 	router.StaticFile("/slideshow", "public/slideshow.html")
 	router.StaticFile("/stats", "public/stats.html")
-
-	//router.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 
 	// TODO: add port setting
 	srv := &http.Server{
